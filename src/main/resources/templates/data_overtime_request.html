@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <div th:replace="header :: headercss"></div>
+
+    <body>
+        <div th:replace="header :: header"></div>
+        <!-- **********************************************************************************************************************************************************
+            MAIN SIDEBAR MENU
+            *********************************************************************************************************************************************************** -->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <p class="centered"><a data-toggle="modal" data-target="#profileModal"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+                    <h5 class="centered">Gede</h5>
+                    <li class="mt">
+                        <a href="/">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="sub-menu">
+                        <a class="active" href="javascript:;">
+                            <i class="fa fa-th"></i>
+                            <span>Data Master</span>
+                        </a>
+                        <ul class="sub">
+                            <li class="active"><a href="data_employee">Employee</a></li>
+                            <li><a href="data_account">Account</a></li>
+                            <li><a href="data_job">Job</a></li>
+                            <li><a href="data_overtime_type">Overtime Type</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-clock-o"></i>
+                            <span>Data Transaction</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="data_employee_job">Employee Job</a></li>
+                            <li><a href="data_employee_role">Employee Role</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-pencil-square-o"></i>
+                            <span>Overtime Request</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="data_overtime_request">Overtime Request</a></li>
+                            <li><a href="data">Employee Role</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-calendar-check-o"></i>
+                            <span>Overtime Approval</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="data">Employee Job</a></li>
+                            <li><a href="data">Employee Role</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+        <!-- **********************************************************************************************************************************************************
+            MAIN CONTENT
+            *********************************************************************************************************************************************************** -->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <h3><i class="fa fa-angle-right"></i> Table Overtime Request </h3>
+                <div class="row mb">
+                    <!-- page start-->
+                    <div class="content-panel">
+                        &nbsp;<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add Data</button><br><br>
+
+                        <div class="adv-table">
+                            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Start</th>
+                                        <th>End</th>
+                                        <th>Hour</th>
+                                        <th>Activity</th>
+                                        <th>Type</th>
+                                        <th>Time Sheet</th>
+                                        <th>Document</th>
+                                        <th>Status</th>
+                                        <th class="hidden-phone" width="18%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="OReq:${dataOvertimeRequest}">
+                                        <td th:text="${OReq.id}"></td>
+                                        <td th:text="${OReq.overtimeDate}"></td>
+                                        <td th:text="${OReq.startTime}"></td>
+                                        <td th:text="${OReq.endTime}"></td>
+                                        <td th:text="${OReq.totalHour}"></td>
+                                        <td th:text="${OReq.activity}"></td>
+                                        <td th:text="${OReq.overtimeType.name}"></td>
+                                        <td th:text="${OReq.timeSheet.period}"></td>
+                                        <td th:text="${OReq.doc}"></td>
+                                        <td th:text="${OReq.status.name}"></td>
+                                        <td class="center hidden-phone">
+                                            <button class="btn btn-info btn btn-xs" data-toggle="modal" data-target="#detailModal"><i class="fa fa-search-plus"></i>Detail</button>&nbsp;
+                                            <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>Edit</button>&nbsp;
+                                            <button class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash"></i>Delete</button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- page end-->
+                </div>
+                <!-- /row -->
+            </section>
+            <!-- /wrapper -->
+        </section>
+        <!-- /MAIN CONTENT -->
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                <p>
+                    &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+                </p>
+                <div class="credits">
+                    <!--
+                      You are NOT allowed to delete the credit link to TemplateMag with free version.
+                      You can delete the credit link only if you bought the pro version.
+                      Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+                      Licensing information: https://templatemag.com/license/
+                    -->
+                    Created with Dashio template by <a href="dist/https://templatemag.com/">TemplateMag</a>
+                </div>
+                <a href="dist/advanced_table.html#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    <!-- Modal Add -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Overtime Request</h4>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/employee_save}" class="form-horizontal style-form" method="post">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Date</label>
+                            <div class="col-sm-3 col-xs-11">
+                                <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="">
+                                <span class="input-group-btn add-on">
+                                    <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Time Sheet</label>
+                            <div class="col-sm-3 col-xs-11">
+                                <div data-date-minviewmode="months" data-date-viewmode="years" data-date-format="mm/yyyy" data-date="01/2014" class="input-append date dpMonths">
+                                    <input type="text" readonly="" value="01/2014" size="16" class="form-control">
+                                    <span class="input-group-btn add-on">
+                                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Start Time</label>
+                            <div class="col-sm-3 col-xs-11">
+                                <div class="input-group bootstrap-timepicker">
+                                    <input type="text" class="form-control timepicker-default">
+                                    <span class="input-group-btn add-on">
+                                        <button class="btn btn-theme04" type="button"><i class="fa fa-clock-o"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">End Time</label>
+                            <div class="col-sm-3 col-xs-11">
+                                <div class="input-group bootstrap-timepicker">
+                                    <input type="text" class="form-control timepicker-default">
+                                    <span class="input-group-btn add-on">
+                                        <button class="btn btn-theme04" type="button"><i class="fa fa-clock-o"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Activity</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="activity" id="activity"  class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="overtime_type" class="col-sm-2 control-label">Type</label>
+                            <div class="col-sm-10">
+                                <select name="overtime_type" id="overtime_type" class="form-control">
+                                    <option value="">-- Select Overtime Type --</option>
+                                    <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Document</label>
+                            <div class="controls col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <span class="btn btn-theme02 btn-file">
+                                        <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select file</span>
+                                        <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                        <input type="file" name="image" class="default" />
+                                    </span>
+                                    <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                    <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal End-->
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/employee_save}" class="form-horizontal style-form" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="firstName" id="firstName"  class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="lastName" id="lastName"  class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="email" id="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="phoneNumber" id="phoneNumber" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Salary</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="salary" id="salary" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="manager" class="col-sm-2 control-label">Manager</label>
+                            <div class="col-sm-10">
+                                <select name="manager" id="manager" class="form-control">
+                                    <option value="">-- Select Manager --</option>
+                                    <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal End-->
+
+    <!-- Modal Detail -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Detail Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal style-form" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="firstName" id="firstName"  class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="lastName" id="lastName"  class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="email" id="email" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="phoneNumber" id="phoneNumber" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Salary</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="salary" id="salary" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="manager" class="col-sm-2 control-label">Manager</label>
+                            <div class="col-sm-10">
+                                <select name="manager" id="manager" class="form-control">
+                                    <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal End-->
+
+    <!-- Modal Profile -->
+    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Delete Employee </h4>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/employee_save}" class="form-horizontal style-form" method="post">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="firstName" id="firstName"  class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group last">
+                            <label class="control-label col-sm-2">Image Upload</label>
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                    <div>
+                                        <span class="btn btn-theme02 btn-file">
+                                            <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span>
+                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                            <input type="file" name="image" id="image" class="default" />
+                                        </span>
+                                        <a href="advanced_form_components.html#" class="btn btn-theme04 fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                            <div class="form-group">
+                                                        <label for="manager" class="col-sm-2 control-label">Manager</label>
+                                                        <div class="col-sm-10">
+                                                            <select name="manager" id="manager" class="form-control">
+                                                                <option value="">-- Select Manager --</option>
+                                                                <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>-->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="footer :: footer"></div>
+
+
+
+</body>
+
+</html>
