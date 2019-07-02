@@ -159,7 +159,7 @@ public class MainController {
     public String getAllOvertimeRequest(Model model) {
         model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
         model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
-        model.addAttribute("dataStatys", overtimeTypeService.findAllOvertimeType());
+//        model.addAttribute("dataStatys", overtimeTypeService.findAllOvertimeType());
         return "data_overtime_request";
     }
     
@@ -167,6 +167,12 @@ public class MainController {
     public String getAllOvertimeRequestStatus(Model model) {
         model.addAttribute("dataOvertimeRequestStatus", overtimeRequestStatusRepository.findAll());
         return "data_overtime_request_status";
+    }
+    
+    @GetMapping("/data_approval")
+    public String getAllApproval(Model model) {
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        return "data_approval";
     }
 
 //    @RequestMapping(value = "/employee_save", method = RequestMethod.POST)
