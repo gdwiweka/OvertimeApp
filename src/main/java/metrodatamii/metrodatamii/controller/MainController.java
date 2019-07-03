@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -65,20 +66,33 @@ public class MainController {
 
     @Autowired
     private OvertimeTypeRepository overtimeTypeRepository;
-    
+
     @Autowired
     private OvertimeRequestRepository overtimeRequestRepository;
-    
+
     @Autowired
     private OvertimeRequestStatusRepository overtimeRequestStatusRepository;
-    
+
     @Autowired
     private TimeSheetRepository timeSheetRepository;
 
     @GetMapping("/")
     public String index(Model model) {
-        return "index";
+        return "login";
     }
+    @GetMapping("/emp_dash")
+    public String indexEmp(Model model) {
+        return "emp_dash";
+    }
+    @GetMapping("/adm_dash")
+    public String indexAdm(Model model) {
+        return "adm_dash";
+    }
+    @GetMapping("/mgr_dash")
+    public String indexMgr(Model model) {
+        return "mgr_dash";
+    }
+    
 
     @GetMapping("/data_employee")
     public String geAllEmployee(Model model) {
@@ -121,18 +135,33 @@ public class MainController {
         return "redirect:/data_job";
     }
 
+    @PostMapping("/job_edit")
+    public String EditJob(Job job) {
+        job.setIsDelete(false);
+        jobRepository.save(job);
+        return "redirect:/data_job";
+    }
+
+    @GetMapping("/find_job")
+    @ResponseBody
+    public Job findJob(String id) {
+        Job j = new Job(jobRepository.getJobById(id).get(0).getId(),
+                jobRepository.getJobById(id).get(0).getName()
+        );
+        return j;
+    }
+
 //    @GetMapping("/data_job/{id}")
 //    public String showUpdateForm(@PathVariable("id") String id, Model model) {
 //        model.addAttribute("dataJob", jobService.findById(id));
 //        return "data_job";
 //    }
-
-    @PostMapping("/job_edit/{id}")
-    public String updateJob(@PathVariable("id") String id, @Valid Job job) {
-        jobRepository.save(job);
-        return "redirect:/data_job";
-    }
-    
+//    @PostMapping("/job_edit/{id}")
+//    public String updateJob(@PathVariable("id") String id, @Valid Job job) {
+//        jobRepository.save(job);
+//        
+//        return "redirect:/data_job";
+//    }
     @GetMapping("/data_overtime_type")
     public String getAllOvertimeType(Model model) {
         model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
@@ -159,7 +188,7 @@ public class MainController {
         model.addAttribute("dataEmployeeRole", employeeRoleService.findAllEmployeeRole());
         return "data_employee_role";
     }
-    
+
 //    EMPLOYEE PART START
     @GetMapping("/emp_overtime_request")
     public String getAllOvertimeRequest(Model model) {
@@ -169,14 +198,14 @@ public class MainController {
         model.addAttribute("overtimeRequestSave", new OvertimeRequest());
         return "emp_overtime_request";
     }
-    
+
     @PostMapping("/emp_overtime_request_save")
     public String addDataOvertimeRequest(OvertimeRequest overtimeRequest) {
         overtimeRequest.setId("0");
         overtimeRequestRepository.save(overtimeRequest);
         return "redirect:/emp_overtime_request";
     }
-    
+
     @GetMapping("/emp_request_history")
     public String getAllOvertimeRequestStatus(Model model) {
         model.addAttribute("dataHistoryRequest", overtimeRequestRepository.findAll());
@@ -190,7 +219,7 @@ public class MainController {
         model.addAttribute("dataHistoryApproval", overtimeRequestRepository.findAll());
         return "mgr_approval_history";
     }
-    
+
     @GetMapping("/mgr_approval")
     public String getAllApproval(Model model) {
         model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());

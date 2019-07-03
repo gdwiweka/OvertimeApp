@@ -19,4 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends CrudRepository<Employee, String> {
     @Query(value = "SELECT * FROM employee WHERE is_delete = 0", nativeQuery = true)
     List<Employee> getAll();
+    @Query(value = "SELECT * FROM employee WHERE id = ?1", nativeQuery = true)
+    List<Employee> getEmployeeById(String id);
+    
 }
