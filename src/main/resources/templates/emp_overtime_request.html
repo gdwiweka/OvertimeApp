@@ -17,35 +17,12 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered"><a data-toggle="modal" data-target="#profileModal"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-                        <h5 class="centered">Gede</h5>
+                        <h5 class="centered">Employee</h5>
                         <li class="mt">
                             <a href="/">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
-                        </li>
-
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-th"></i>
-                                <span>Data Master</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="data_employee">Employee</a></li>
-                                <li><a href="data_account">Account</a></li>
-                                <li><a href="data_job">Job</a></li>
-                                <li><a href="data_overtime_type">Overtime Type</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-clock-o"></i>
-                                <span>Data Transaction</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="data_employee_job">Employee Job</a></li>
-                                <li><a href="data_employee_role">Employee Role</a></li>
-                            </ul>
                         </li>
                         <li class="sub-menu">
                             <a class="active" href="javascript:;">
@@ -53,18 +30,8 @@
                                 <span>Overtime Request</span>
                             </a>
                             <ul class="sub">
-                                <li class="active"><a href="data_overtime_request">Overtime Request</a></li>
-                                <li><a href="data_overtime_request_status">Overtime Request Status</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-calendar-check-o"></i>
-                                <span>Overtime Approval</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="data">Employee Job</a></li>
-                                <li><a href="data">Employee Role</a></li>
+                                <li class="active"><a href="emp_overtime_request">Overtime Request</a></li>
+                                <li><a href="emp_request_history">History Request</a></li>
                             </ul>
                         </li>
 
@@ -83,41 +50,39 @@
                     <div class="row mb">
                         <!-- page start-->
                         <div class="content-panel">
-                            &nbsp;<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add Data</button><br><br>
+                            &nbsp;<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add Request</button><br><br>
 
                             <div class="adv-table">
                                 <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Time Sheet</th>
                                             <th>Date</th>
                                             <th>Start</th>
                                             <th>End</th>
                                             <th>Hour</th>
                                             <th>Activity</th>
                                             <th>Type</th>
-                                            <th>Time Sheet</th>
                                             <th>Document</th>
                                             <th>Status</th>
-                                            <th class="hidden-phone" width="18%">Action</th>
+                                            <th class="hidden-phone" width="10%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="OReq:${dataOvertimeRequest}">
                                             <td th:text="${OReq.id}"></td>
+                                            <td th:text="${OReq.timeSheet.period}"></td>
                                             <td th:text="${OReq.overtimeDate}"></td>
                                             <td th:text="${OReq.startTime}"></td>
                                             <td th:text="${OReq.endTime}"></td>
                                             <td th:text="${OReq.totalHour}"></td>
                                             <td th:text="${OReq.activity}"></td>
                                             <td th:text="${OReq.overtimeType.name}"></td>
-                                            <td th:text="${OReq.timeSheet.period}"></td>
                                             <td th:text="${OReq.doc}"></td>
                                             <td th:text="${OReq.status.name}"></td>
                                             <td class="center hidden-phone">
-                                                <button class="btn btn-info btn btn-xs" data-toggle="modal" data-target="#detailModal"><i class="fa fa-search-plus"></i>Detail</button>&nbsp;
-                                                <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>Edit</button>&nbsp;
-                                                <button class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash"></i>Delete</button>
+                                                <button class="btn btn-danger btn-xs btnCancel"><i class="fa fa-times"></i>Cancel</button>
                                             </td>
                                         </tr>
 
@@ -165,46 +130,42 @@
                         <h4 class="modal-title" id="myModalLabel">Add Overtime Request</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/employee_save}" class="form-horizontal style-form" method="post">
+                        <form th:action="@{/emp_overtime_request_save}" class="form-horizontal style-form" method="post" autocomplete="off">
                             <div class="form-group">
-                                <label class="control-label col-sm-2">Date</label>
-                                <div class="col-sm-3 col-xs-11">
-                                    <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="">
-                                    <span class="input-group-btn add-on">
-                                        <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
-                                    </span>
+                                <label for="timeSheet" class="col-sm-2 control-label">Time Sheet</label>
+                                <div class="col-sm-10">
+                                    <select name="timeSheet" id="timeSheet" class="form-control">
+                                        <option value="">-- Select Timesheet --</option>
+                                        <option th:each="data:${dataTimeSheet}" th:value="${data.id}" th:text="${data.period}"></option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-sm-2">Time Sheet</label>
-                                <div class="col-sm-3 col-xs-11">
-                                    <div data-date-minviewmode="months" data-date-viewmode="years" data-date-format="mm/yyyy" data-date="01/2014" class="input-append date dpMonths">
-                                        <input type="text" readonly="" value="01/2014" size="16" class="form-control">
-                                        <span class="input-group-btn add-on">
-                                            <button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
-                                        </span>
-                                    </div>
+                                <label for="overtimeDate" class="control-label col-sm-2">Date</label>
+                                <div class="col-sm-10">
+                                    <input name="overtimeDate" id="overtimeDate" class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" data-date-format="yyyy-mm-dd" value="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Start Time</label>
-                                <div class="col-sm-3 col-xs-11">
+                                <div class="col-sm-10">
                                     <div class="input-group bootstrap-timepicker">
-                                        <input type="text" class="form-control timepicker-default">
+                                        <input name="startTime" id="startTime" type="text" class="form-control timepicker-24">
                                         <span class="input-group-btn add-on">
                                             <button class="btn btn-theme04" type="button"><i class="fa fa-clock-o"></i></button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">End Time</label>
-                                <div class="col-sm-3 col-xs-11">
+                                <div class="col-sm-10">
                                     <div class="input-group bootstrap-timepicker">
-                                        <input type="text" class="form-control timepicker-default">
+                                        <input name="endTime" id="endTime" type="text" class="form-control timepicker-24">
                                         <span class="input-group-btn add-on">
                                             <button class="btn btn-theme04" type="button"><i class="fa fa-clock-o"></i></button>
                                         </span>
@@ -212,23 +173,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Activity</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="activity" id="activity"  class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="overtime_type" class="col-sm-2 control-label">Type</label>
-                                <div class="col-sm-10">
-                                    <select name="overtime_type" id="overtime_type" class="form-control">
-                                        <option value="">-- Select Overtime Type --</option>
-                                        <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.name}"></option>
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Document</label>
@@ -237,11 +181,27 @@
                                         <span class="btn btn-theme02 btn-file">
                                             <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select file</span>
                                             <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                            <input type="file" name="image" class="default" />
+                                            <input type="file" name="doc" id="doc" class="default" />
                                         </span>
                                         <span class="fileupload-preview" style="margin-left:5px;"></span>
                                         <a href="advanced_form_components.html#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="overtimeType" class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select name="overtimeType" id="overtimeType" class="form-control">
+                                        <option value="">-- Select Overtime Type --</option>
+                                        <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Activity</label>
+                                <div class="col-sm-10">
+                                    <textarea name="activity" id="activity"  class="form-control"></textarea>
                                 </div>
                             </div>
 

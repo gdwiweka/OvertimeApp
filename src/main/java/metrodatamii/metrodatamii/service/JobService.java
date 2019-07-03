@@ -33,28 +33,28 @@ import org.springframework.stereotype.Service;
 //}
 
 @Service
-public class JobService implements IJobDAO{
+public class JobService{
     @Autowired
     JobRepository jobRepository;
     
-    @Override
-    public Iterable<Job> findAll() {
-        return jobRepository.findAll();
-    }
-
-    @Override
-    public Job saveJob(Job job) {
-        return jobRepository.save(job);
-    }
-
-    @Override
-    public Job findById(String id) {
-        return jobRepository.findJobById(id);
-    }
-
-    @Override
-    public void deleteRegionById(String id) {
-        jobRepository.deleteById(id);
-    }
+//    @Override
+//    public Iterable<Job> findAll() {
+//        return jobRepository.findAll();
+//    }
+//
+//    @Override
+//    public Job saveJob(Job job) {
+//        return jobRepository.save(job);
+//    }
+//
+//    @Override
+//    public Job findById(String id) {
+//        return jobRepository.findById(id);
+//    }
+//
+//    @Override
+//    public void deleteRegionById(String id) {
+//        jobRepository.deleteById(id);
+//    }
     
 }

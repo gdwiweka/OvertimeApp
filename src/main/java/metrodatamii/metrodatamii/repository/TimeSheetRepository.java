@@ -5,9 +5,9 @@
  */
 package metrodatamii.metrodatamii.repository;
 
-import java.util.List;
-import metrodatamii.metrodatamii.entities.Employee;
-import org.springframework.data.jpa.repository.Query;
+import metrodatamii.metrodatamii.entities.Job;
+import metrodatamii.metrodatamii.entities.OvertimeType;
+import metrodatamii.metrodatamii.entities.TimeSheet;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
  * @author WIN7
  */
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee, String> {
-    @Query(value = "SELECT * FROM employee WHERE is_delete = 0", nativeQuery = true)
-    List<Employee> getAll();
+public interface TimeSheetRepository extends CrudRepository<TimeSheet, Integer> {
+    
 }

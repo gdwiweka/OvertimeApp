@@ -5,6 +5,7 @@
  */
 package metrodatamii.metrodatamii.repository;
 
+import java.util.List;
 import metrodatamii.metrodatamii.entities.Job;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,12 +18,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface JobRepository extends CrudRepository<Job, String> {
-    @Query(value = "SELECT * FROM job where id=?1", nativeQuery = true)
-    public Job findJobById(String id);
-    
-    @Modifying
-    @Query(value = "DELETE FROM job where id=?1", nativeQuery = true)
-    public void deleteById(String id);
-    
-    
+
+    @Query(value = "SELECT * FROM job  WHERE is_delete = 0", nativeQuery = true)
+    List<Job> getAll();
+//    @Query(value = "SELECT * FROM job where id=?1", nativeQuery = true)
+//    public Job findJobById(String id);
+//    
+//    @Modifying
+//    @Query(value = "DELETE FROM job where id=?1", nativeQuery = true)
+//    public void deleteById(String id);
+
 }

@@ -18,7 +18,7 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered"><a href="dist/profile.html"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-                        <h5 class="centered">Gede</h5>
+                        <h5 class="centered">Admin</h5>
                         <li class="mt">
                             <a href="">
                                 <i class="fa fa-dashboard"></i>
@@ -27,7 +27,7 @@
                         </li>
 
                         <li class="sub-menu">
-                            <a class="active" href="javascript:;">
+                            <a href="javascript:;">
                                 <i class="fa fa-th"></i>
                                 <span>Data Master</span>
                             </a>
@@ -39,33 +39,12 @@
                             </ul>
                         </li>
                         <li class="sub-menu">
-                            <a href="javascript:;">
+                            <a class="active" href="javascript:;">
                                 <i class="fa fa-clock-o"></i>
                                 <span>Data Transaction</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="data_employee_job">Employee Job</a></li>
-                                <li><a href="data_employee_role">Employee Role</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-pencil-square-o"></i>
-                                <span>Overtime Request</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="data">Employee Job</a></li>
-                                <li><a href="data">Employee Role</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-calendar-check-o"></i>
-                                <span>Overtime Approval</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="data">Employee Job</a></li>
-                                <li><a href="data">Employee Role</a></li>
+                                <li class="active"><a href="data_employee_job">Job&Role</a></li>
                             </ul>
                         </li>
 
@@ -80,7 +59,7 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Table Employee Job </h3>
+                    <h3><i class="fa fa-angle-right"></i> Table Employee Job & Role</h3>
                     <div class="row mb">
                         <!-- page start-->
                         <div class="content-panel">
@@ -89,10 +68,9 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>NAME</th>
-                                            <th>JOB</th>
-                                            <th>ROLE</th>
-                                            <th>ACTION</th>
+                                            <th>Name</th>
+                                            <th>Job</th>
+                                            <th>Role</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,9 +84,6 @@
                                             <td>
                                                 <a th:each="list:${employee.employeeRoleList}">
                                                     <p th:text="${list.role.name}"></p></a>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>Edit</button>
                                             </td>
                                         </tr>
 

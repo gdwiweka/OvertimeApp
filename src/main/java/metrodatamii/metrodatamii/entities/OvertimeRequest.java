@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -56,16 +57,19 @@ public class OvertimeRequest implements Serializable {
     @NotNull
     @Column(name = "overtime_date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date overtimeDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern="hh:mm:ss")
     private Date startTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern="hh:mm:ss")
     private Date endTime;
     @Basic(optional = false)
     @NotNull
