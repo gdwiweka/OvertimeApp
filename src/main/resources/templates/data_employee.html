@@ -80,15 +80,15 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="Employee:${dataEmployee}">
-                                            <td th:text="${Employee.id}"></td>
-                                            <td th:text="${Employee.firstName}"></td>
-                                            <td th:text="${Employee.lastName}"></td>
-                                            <td th:text="${Employee.email}"></td>
-                                            <td th:text="${Employee.phoneNumber}"></td>
-                                            <td th:text="${Employee.salary}"></td>
-                                            <td th:text="${Employee.manager.firstName}"></td>
+                                            <td id="id" th:text="${Employee.id}"></td>
+                                            <td id="firstName" th:text="${Employee.firstName}"></td>
+                                            <td id="lastName" th:text="${Employee.lastName}"></td>
+                                            <td id="email" th:text="${Employee.email}"></td>
+                                            <td id="phoneNumber" th:text="${Employee.phoneNumber}"></td>
+                                            <td id="salary" th:text="${Employee.salary}"></td>
+                                            <td id="manager" th:text="${Employee.manager.firstName}"></td>
                                             <td class="center hidden-phone">
-                                                <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>Edit</button>&nbsp;
+                                                <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editEmpModal"><i class="fa fa-edit"></i>Edit</button>&nbsp;
                                                 <button class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash"></i>Delete</button>
                                             </td>
                                         </tr>
@@ -189,7 +189,7 @@
         <!--Modal End-->
 
         <!-- Modal Edit -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -197,7 +197,13 @@
                         <h4 class="modal-title" id="myModalLabel">Edit Employee</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/employee_save}" class="form-horizontal style-form" method="post">
+                        <form th:action="@{/employee_edit/id}" class="form-horizontal style-form" method="post">
+                            <div class="form-group">
+                                <label for="id" class="col-sm-2 control-label">ID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="id" name="id" placeholder="Employee ID" readonly>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">First Name</label>
                                 <div class="col-sm-10">

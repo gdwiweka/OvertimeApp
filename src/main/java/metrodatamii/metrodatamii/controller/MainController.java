@@ -96,17 +96,24 @@ public class MainController {
         return "mgr_dash";
     }
 
+    @GetMapping("/data_employee_job")
+    public String geAllEmployeeJobRole(Model model) {
+        model.addAttribute("dataEmployee", employeeRepository.findAll());
+        return "data_employee_job";
+    }
+
+    @GetMapping("/data_account")
+    public String getAllAccount(Model model) {
+        model.addAttribute("dataAccount", accountService.findAllAccount());
+        model.addAttribute("dataEmployee", employeeRepository.findAll());
+        return "data_account";
+    }
+
     @GetMapping("/data_employee")
     public String geAllEmployee(Model model) {
         model.addAttribute("dataEmployee", employeeRepository.findAll());
         model.addAttribute("employeeSave", new Employee());
         return "data_employee";
-    }
-
-    @GetMapping("/data_employee_job")
-    public String geAllEmployeeJobRole(Model model) {
-        model.addAttribute("dataEmployee", employeeRepository.findAll());
-        return "data_employee_job";
     }
 
     @PostMapping("/employee_save")
@@ -116,12 +123,19 @@ public class MainController {
         return "redirect:/data_employee";
     }
 
-    @GetMapping("/data_account")
-    public String getAllAccount(Model model) {
-        model.addAttribute("dataAccount", accountService.findAllAccount());
-        model.addAttribute("dataEmployee", employeeRepository.findAll());
-        return "data_account";
+    @PostMapping("employee_edit/{id}")
+    public String updateEmployee(@PathVariable("id") String id, @Valid Employee employee) {
+        employee.setIsDelete(false);
+        employeeRepository.save(employee);
+        return "redirect:/data_employee";
     }
+//    
+//    @PostMapping("employee_edit/{id}")
+//    public String updateEmployee(@PathVariable("id") String id, @Valid Employee employee) {
+//        employee.setIsDelete(false);
+//        employeeRepository.save(employee);
+//        return "redirect:/data_employee";
+//    }
 
     @GetMapping("/data_job")
     public String getAllJob(Model model) {
@@ -137,13 +151,55 @@ public class MainController {
         return "redirect:/data_job";
     }
 
+    @PostMapping("job_edit/{id}")
+    public String updateJob(@PathVariable("id") String id, @Valid Job job) {
+        job.setIsDelete(false);
+        jobRepository.save(job);
+        return "redirect:/data_job";
+    }
+    
+    @PostMapping("job_delete/{id}")
+    public String jobDelete(@PathVariable("id") String id, @Valid Job job) {
+        job.setIsDelete(true);
+        jobRepository.save(job);
+        return "redirect:/data_job";
+    }
+    
+    @GetMapping("/data_overtime_type")
+    public String getAllOvertimeType(Model model) {
+        model.addAttribute("dataOvertimeType", overtimeTypeRepository.getAll());
+        model.addAttribute("overtimeTypeSave", new OvertimeType());
+        return "data_overtime_type";
+    }
+    
+    @PostMapping("/overtime_type_save")
+    public String addDataOvertimeType(OvertimeType overtimeType) {
+        overtimeType.setId("0");
+        overtimeTypeRepository.save(overtimeType);
+        return "redirect:/data_overtime_type";
+    }
+    
+    @PostMapping("overtime_type_edit/{id}")
+    public String updateType(@PathVariable("id") String id, @Valid OvertimeType overtimeType) {
+        overtimeType.setIsDelete(false);
+        overtimeTypeRepository.save(overtimeType);
+        return "redirect:/data_overtime_type";
+    }
+    
+    @PostMapping("overtime_type_delete/{id}")
+    public String deleteType(@PathVariable("id") String id, @Valid OvertimeType overtimeType) {
+        overtimeType.setIsDelete(true);
+        overtimeTypeRepository.save(overtimeType);
+        return "redirect:/data_overtime_type";
+    }
+
+    
 //    @PostMapping("/job_edit")
 //    public String EditJob(Job job) {
 //        job.setIsDelete(false);
 //        jobRepository.save(job);
 //        return "redirect:/data_job";
 //    }
-
 //    @GetMapping("/find_job")
 //    @ResponseBody
 //    public Job findJob(String id) {
@@ -152,13 +208,6 @@ public class MainController {
 //        );
 //        return j;
 //    }
-    @PostMapping("job_edit/{id}")
-    public String upadateData(@PathVariable("id") String id, @Valid Job job) {
-        job.setIsDelete(false);
-        jobRepository.save(job);
-        return "redirect:/data_job";
-    }
-
 //    @GetMapping("/data_job/{id}")
 //    public String showUpdateForm(@PathVariable("id") String id, Model model) {
 //        model.addAttribute("dataJob", jobService.findById(id));
@@ -170,20 +219,6 @@ public class MainController {
 //        
 //        return "redirect:/data_job";
 //    }
-    @GetMapping("/data_overtime_type")
-    public String getAllOvertimeType(Model model) {
-        model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
-        model.addAttribute("overtimeTypeSave", new OvertimeType());
-        return "data_overtime_type";
-    }
-
-    @PostMapping("/overtime_type_save")
-    public String addDataOvertimeType(OvertimeType overtimeType) {
-        overtimeType.setId("0");
-        overtimeTypeRepository.save(overtimeType);
-        return "redirect:/data_overtime_type";
-    }
-
 //    @GetMapping("/data_employee_job")
 //    public String getAllEmployeeJob(Model model) {
 //        String id = "2";

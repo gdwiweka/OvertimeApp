@@ -34,13 +34,80 @@
         
         <script>
             $(document).ready(function () {
-                $("#editModal").on('show.bs.modal', function (e) {
+                $("#deleteJobModal").on('show.bs.modal', function (e) {
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
                     var _jobId = _row.find("#id").text();
                     var _jobName = _row.find("#name").text();
                     $(this).find("#id").val(_jobId);
                     $(this).find("#name").val(_jobName);
+                })
+            })
+        </script>
+        
+        <script>
+            $(document).ready(function () {
+                $("#editJobModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _jobId = _row.find("#id").text();
+                    var _jobName = _row.find("#name").text();
+                    $(this).find("#id").val(_jobId);
+                    $(this).find("#name").val(_jobName);
+                })
+            })
+        </script>
+        
+        <script>
+            $(document).ready(function () {
+                $("#editTypeModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _Id = _row.find("#id").text();
+                    var _Name = _row.find("#name").text();
+                    var _Percent = _row.find("#percentage").text();
+                    $(this).find("#id").val(_Id);
+                    $(this).find("#name").val(_Name);
+                    $(this).find("#percentage").val(_Percent);
+                })
+            })
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#deleteTypeModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _Id = _row.find("#id").text();
+                    var _Name = _row.find("#name").text();
+                    var _Percent = _row.find("#percentage").text();
+                    $(this).find("#id").val(_Id);
+                    $(this).find("#name").val(_Name);
+                    $(this).find("#percentage").val(_Percent);
+                })
+            })
+        </script>
+        
+        
+        
+        <script>
+            $(document).ready(function () {
+                $("#editEmpModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _id = _row.find("#id").text();
+                    var _first = _row.find("#firstName").text();
+                    var _last = _row.find("#lastName").text();
+                    var _email = _row.find("#email").text();
+                    var _phone = _row.find("#phoneNumber").text();
+                    var _salary = _row.find("#salary").text();
+                    var _manager = _row.find("#manager").text();
+                    $(this).find("#id").val(_id);
+                    $(this).find("#firstName").val(_first);
+                    $(this).find("#lastName").val(_last);
+                    $(this).find("#email").val(_email);
+                    $(this).find("#phoneNumber").val(_phone);
+                    $(this).find("#salary").val(_salary);
+                    $(this).find("#manager").val(_manager);
                 })
             })
         </script>

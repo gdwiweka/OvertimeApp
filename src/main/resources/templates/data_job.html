@@ -67,6 +67,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Job</th>
+                                            <th>is Delete</th>
                                             <th class="hidden-phone" width="18%">Action</th>
                                         </tr>
                                     </thead>
@@ -74,11 +75,13 @@
                                         <tr th:each="Job:${dataJob}">
                                             <td id="id" th:text="${Job.id}"></td>
                                             <td id="name" th:text="${Job.name}"></td>
+                                            <td id="is_delete" th:text="${Job.isDelete}"></td>
                                             <td class="center hidden-phone">
                                                 <!--<a th:href="@{/find_job/(id=${Job.id})}" class="btn btn-success btn btn-xs btnEdit"><i class="fa fa-edit" ></i>Edit</a>-->
-                                                <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>
+                                                <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#editJobModal"><i class="fa fa-edit"></i>
                                                     Edit</button>
-                                                <button class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash"></i>Delete</button>
+                                                <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteJobModal"><i class="fa fa-trash"></i>
+                                                    Delete</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -145,7 +148,7 @@
 
         <!-- Modal Edit -->
         <div class="myForm">
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editJobModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -177,7 +180,39 @@
             </div>
         </div>
         <!--Modal End-->
-        
+
+        <!-- Modal Delete -->
+        <div class="myForm">
+            <div class="modal fade" id="deleteJobModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Edit Job</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are You Sure Delete ?</p>
+                            <form th:action="@{/job_delete/id}"class="form-horizontal style-form" method="post">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="id" name="id" placeholder="Job ID" readonly>
+                                    </div> 
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Job Name" readonly>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Modal End-->
+
         <div th:replace="footer :: footer"></div>
     </body>
 
