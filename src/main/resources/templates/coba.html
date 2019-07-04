@@ -1,0 +1,811 @@
+<!--<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Data Table | Adminpro - Admin Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     favicon
+		============================================ 
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/dist2/img/favicon.ico}">
+     Google Fonts
+		============================================ 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+     Bootstrap CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/bootstrap.min.css}">
+     Bootstrap CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/font-awesome.min.css}">
+     adminpro icon CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/adminpro-custon-icon.css}">
+     meanmenu icon CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/meanmenu.min.css}">
+     mCustomScrollbar CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/jquery.mCustomScrollbar.min.css}">
+     animate CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/animate.css}">
+     buttons CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/buttons.css}">
+     normalize CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/data-table/bootstrap-table.css}">
+    <link rel="stylesheet" th:href="@{/dist2/css/data-table/bootstrap-editable.css}">
+     modals CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/modals.css}">
+     tabs CSS
+            ============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/tabs.css}">
+     normalize CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/normalize.css}">
+     charts CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/c3.min.css}">
+
+     style CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/style.css}">
+     responsive CSS
+		============================================ 
+    <link rel="stylesheet" th:href="@{/dist2/css/responsive.css}">
+     modernizr JS
+		============================================ 
+    <script th:src="@{/dist2/js/vendor/modernizr-2.8.3.min.js}"></script>
+</head>
+
+<body>
+    [if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]
+     Header top area start
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <a th:href="@{/dist2/#}"><img th:src="@{/dist2/img/logo/overtime.png}" alt="" />
+                    </a>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-0 col-xs-12">
+                     untuk ngisi spasi aja 
+                </div>
+                <div class="col-lg-4 col-md-9 col-sm-6 col-xs-12">
+                    <div class="header-right-info">
+                        <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                            <li class="nav-item">
+                                <a th:href="@{/dist2/#}" data-toggle="dropdown" role="button" aria-expanded="false"
+                                    class="nav-link dropdown-toggle">
+                                    <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
+                                    <span class="admin-name">Arief</span>
+                                    <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                </a>
+                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
+                                    <li><a th:href="@{/dist2/#}"><span
+                                                class="adminpro-icon adminpro-home-admin author-log-ic"></span>My
+                                            Account</a>
+                                    </li>
+                                    <li><a th:href="@{/dist2/#}"><span
+                                                class="adminpro-icon adminpro-settings author-log-ic"></span>Settings</a>
+                                    </li>
+                                    <li><a th:href="@{/dist2/#}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log
+                                            Out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item nav-setting-open"><a th:href="@{/dist2/#}" data-toggle="dropdown" role="button"
+                                    aria-expanded="false" class="nav-link dropdown-toggle"><i
+                                        class="fa fa-tasks"></i></a>
+
+                                <div role="menu"
+                                    class="admintab-wrap menu-setting-wrap menu-setting-wrap-bg dropdown-menu animated flipInX">
+                                    <ul class="nav nav-tabs custon-set-tab">
+                                        <li class="active"><a data-toggle="tab" th:href="@{Notes}">Notes</a>
+                                        </li>
+                                        <li><a data-toggle="tab" th:href="@{Projects}">Projects</a>
+                                        </li>
+                                        <li><a data-toggle="tab" th:href="@{Settings}">Settings</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div id="Notes" class="tab-pane fade in active">
+                                            <div class="notes-area-wrap">
+                                                <div class="note-heading-indicate">
+                                                    <h2><i class="fa fa-comments-o"></i> Latest Notes</h2>
+                                                    <p>You have 10 new message.</p>
+                                                </div>
+                                                <div class="notes-list-area notes-menu-scrollbar">
+                                                    <ul class="notes-menu-list">
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/5.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/1.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/2.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/3.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/4.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/5.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/6.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/1.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/2.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="notes-list-flow">
+                                                                    <div class="notes-img">
+                                                                        <img th:src="@{/dist2/img/notification/3.jpg}" alt="" />
+                                                                    </div>
+                                                                    <div class="notes-content">
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more-or-less normal.</p>
+                                                                        <span>Yesterday 2:45 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="Projects" class="tab-pane fade">
+                                            <div class="projects-settings-wrap">
+                                                <div class="note-heading-indicate">
+                                                    <h2><i class="fa fa-cube"></i> Latest projects</h2>
+                                                    <p> You have 20 projects. 5 not completed.</p>
+                                                </div>
+                                                <div class="project-st-list-area project-st-menu-scrollbar">
+                                                    <ul class="projects-st-menu-list">
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Web Development</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">1 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content">
+                                                                        <p>Completion with: 28%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 28%;"
+                                                                                class="progress-bar progress-bar-danger">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Software Development</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">2 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content project-rating-cl">
+                                                                        <p>Completion with: 68%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 68%;"
+                                                                                class="progress-bar"></div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Graphic Design</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">3 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content">
+                                                                        <p>Completion with: 78%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 78%;"
+                                                                                class="progress-bar"></div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Web Design</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">4 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content project-rating-cl2">
+                                                                        <p>Completion with: 38%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 38%;"
+                                                                                class="progress-bar progress-bar-danger">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Business Card</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">5 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content">
+                                                                        <p>Completion with: 28%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 28%;"
+                                                                                class="progress-bar progress-bar-danger">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Ecommerce Business</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">6 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content project-rating-cl">
+                                                                        <p>Completion with: 68%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 68%;"
+                                                                                class="progress-bar"></div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Woocommerce Plugin</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">7 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content">
+                                                                        <p>Completion with: 78%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 78%;"
+                                                                                class="progress-bar"></div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a th:href="@{/dist2/#}">
+                                                                <div class="project-list-flow">
+                                                                    <div class="projects-st-heading">
+                                                                        <h2>Wordpress Theme</h2>
+                                                                        <p> The point of using Lorem Ipsum is that it
+                                                                            has a more or less normal.</p>
+                                                                        <span class="project-st-time">9 hours ago</span>
+                                                                    </div>
+                                                                    <div class="projects-st-content project-rating-cl2">
+                                                                        <p>Completion with: 38%</p>
+                                                                        <div class="progress progress-mini">
+                                                                            <div style="width: 38%;"
+                                                                                class="progress-bar progress-bar-danger">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>Project end: 4:00 pm - 12.06.2014</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="Settings" class="tab-pane fade">
+                                            <div class="setting-panel-area">
+                                                <div class="note-heading-indicate">
+                                                    <h2><i class="fa fa-gears"></i> Settings Panel</h2>
+                                                    <p> You have 20 Settings. 5 not completed.</p>
+                                                </div>
+                                                <ul class="setting-panel-list">
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Show notifications</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            class="onoffswitch-checkbox" id="example">
+                                                                        <label class="onoffswitch-label" for="example">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Disable Chat</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            class="onoffswitch-checkbox" id="example3">
+                                                                        <label class="onoffswitch-label" for="example3">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Enable history</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            class="onoffswitch-checkbox" id="example4">
+                                                                        <label class="onoffswitch-label" for="example4">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Show charts</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            class="onoffswitch-checkbox" id="example7">
+                                                                        <label class="onoffswitch-label" for="example7">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Update everyday</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            checked="" class="onoffswitch-checkbox"
+                                                                            id="example2">
+                                                                        <label class="onoffswitch-label" for="example2">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Global search</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            checked="" class="onoffswitch-checkbox"
+                                                                            id="example6">
+                                                                        <label class="onoffswitch-label" for="example6">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="checkbox-setting-pro">
+                                                            <div class="checkbox-title-pro">
+                                                                <h2>Offline users</h2>
+                                                                <div class="ts-custom-check">
+                                                                    <div class="onoffswitch">
+                                                                        <input type="checkbox" name="collapsemenu"
+                                                                            checked="" class="onoffswitch-checkbox"
+                                                                            id="example5">
+                                                                        <label class="onoffswitch-label" for="example5">
+                                                                            <span class="onoffswitch-inner"></span>
+                                                                            <span class="onoffswitch-switch"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     Header top area end
+     Main Menu area start
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs custom-menu-wrap">
+                        <li><a th:href="@{Home}">Home</a>
+                        </li>
+                        </li>
+                        <li class="active"><a data-toggle="tab" th:href="@{Tables}">Overtime Request</a>
+                        </li>
+                        <li><a data-toggle="tab" th:href="@{Forms}">Overtime Approval</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+
+                        <div id="Tables" class="tab-pane in active tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a th:href="@{/dist2/static-table.html}">Data Request</a>
+                                </li>
+                                <li><a th:href="@{/dist2/data-table.html}">Data History</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Forms" class="tab-pane tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a th:href="@{/dist2/basic-form-element.html}">Data Approval</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     Main Menu area End
+     Breadcome start
+    <div class="breadcome-area mg-t-40 mg-b-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcome-list shadow-reset">
+                        <div class="breadcome-heading">
+                            <h2>Data Request</h2>
+                        </div>
+                        <ul class="breadcome-menu">
+                            <li><a th:href="@{#}">Home</a> <span class="bread-slash">/</span>
+                            </li>
+                            <li><a th:href="@{#}">Overtime Request</a> <span class="bread-slash">/</span>
+                            </li>
+                            <li><span class="bread-blod">Data Request</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     Breadcome End
+     Static Table Start 
+    <div class="data-table-area mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>Request Table </h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <button type="button" class="btn btn-custom-rounded-four btn-success"
+                                    style="float: left" th:href="@{#}" data-toggle="modal" data-target="#PrimaryModalhdbgcl">
+                                    <span class="fa fa-plus"></span> Add Data
+                                </button>
+
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                    >
+                                    <thead>
+                                         <tr>
+                                            <th>ID</th>
+                                            <th>Time Sheet</th>
+                                            <th>Date</th>
+                                            <th>Start</th>
+                                            <th>End</th>
+                                            <th>Hour</th>
+                                            <th>Activity</th>
+                                            <th>Type</th>
+                                            <th>Document</th>
+                                            <th>Status</th>
+                                            <th class="hidden-phone" width="10%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="OReq:${dataOvertimeRequest}">
+                                            <td th:text="${OReq.id}"></td>
+                                            <td th:text="${OReq.timeSheet.period}"></td>
+                                            <td th:text="${OReq.overtimeDate}"></td>
+                                            <td th:text="${OReq.startTime}"></td>
+                                            <td th:text="${OReq.endTime}"></td>
+                                            <td th:text="${OReq.totalHour}"></td>
+                                            <td th:text="${OReq.activity}"></td>
+                                            <td th:text="${OReq.overtimeType.name}"></td>
+                                            <td th:text="${OReq.doc}"></td>
+                                            <td th:text="${OReq.status.name}"></td>
+                                            <td class="center hidden-phone">
+                                                <button class="btn btn-danger btn-xs btnCancel"><i class="fa fa-times"></i>Cancel</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     Static Table End 
+     Footer Start
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright &#169; 2018 Colorlib All rights reserved. Template by <a
+                                href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     Footer End
+     modal 
+    <div id="PrimaryModalhdbgcl" class="modal modal-adminpro-general default-popup-PrimaryModal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header header-color-modal bg-color-1">
+                    <h4 class="modal-title">Add Request</h4>
+                    <div class="modal-close-area modal-close-df">
+                        <a class="close" data-dismiss="modal" th:href="@{#}"><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/job_edit/id}" class="form-horizontal style-form" method="post">
+                        <div class="form-group">
+                            <label for="id" class="col-sm-2 control-label">Job ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id" name="id" placeholder="Job ID" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Job
+                                Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Job Name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+     modal end 
+     jquery
+		============================================ 
+    <script th:src="@{/dist2/js/vendor/jquery-1.11.3.min.js}"></script>
+     bootstrap JS
+		============================================ 
+    <script th:src="@{/dist2/js/bootstrap.min.js}"></script>
+     meanmenu JS
+		============================================ 
+    <script th:src="@{/dist2/js/jquery.meanmenu.js}"></script>
+     mCustomScrollbar JS
+		============================================ 
+    <script th:src="@{/dist2/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+     sticky JS
+		============================================ 
+    <script th:src="@{/dist2/js/jquery.sticky.js}"></script>
+     scrollUp JS
+		============================================ 
+    <script th:src="@{/dist2/js/jquery.scrollUp.min.js}"></script>
+     counterup JS
+		============================================ 
+    <script th:src="@{/dist2/js/counterup/jquery.counterup.min.js}"></script>
+    <script th:src="@{/dist2/js/counterup/waypoints.min.js}"></script>
+     peity JS
+		============================================ 
+    <script th:src="@{/dist2/js/peity/jquery.peity.min.js}"></script>
+    <script th:src="@{/dist2/js/peity/peity-active.js}"></script>
+     sparkline JS
+		============================================ 
+    <script th:src="@{/dist2/js/sparkline/jquery.sparkline.min.js}"></script>
+    <script th:src="@{/dist2/js/sparkline/sparkline-active.js}"></script>
+     data table JS
+		============================================ 
+    <script th:src="@{/dist2/js/data-table/bootstrap-table.js}"></script>
+    <script th:src="@{/dist2/js/data-table/tableExport.js}"></script>
+    <script th:src="@{/dist2/js/data-table/data-table-active.js}"></script>
+    <script th:src="@{/dist2/js/data-table/bootstrap-table-editable.js}"></script>
+    <script th:src="@{/dist2/js/data-table/bootstrap-editable.js}"></script>
+    <script th:src="@{/dist2/js/data-table/bootstrap-table-resizable.js}"></script>
+    <script th:src="@{/dist2/js/data-table/colResizable-1.5.source.js}"></script>
+    <script th:src="@{/dist2/js/data-table/bootstrap-table-export.js}"></script>
+     main JS
+		============================================ 
+    <script th:src="@{/dist2/js/main.js}"></script>
+
+
+</body>
+
+</html>-->

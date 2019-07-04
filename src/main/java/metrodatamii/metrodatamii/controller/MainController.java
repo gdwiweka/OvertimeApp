@@ -80,19 +80,21 @@ public class MainController {
     public String index(Model model) {
         return "login";
     }
+
     @GetMapping("/emp_dash")
     public String indexEmp(Model model) {
         return "emp_dash";
     }
+
     @GetMapping("/adm_dash")
     public String indexAdm(Model model) {
         return "adm_dash";
     }
+
     @GetMapping("/mgr_dash")
     public String indexMgr(Model model) {
         return "mgr_dash";
     }
-    
 
     @GetMapping("/data_employee")
     public String geAllEmployee(Model model) {
@@ -135,20 +137,26 @@ public class MainController {
         return "redirect:/data_job";
     }
 
-    @PostMapping("/job_edit")
-    public String EditJob(Job job) {
+//    @PostMapping("/job_edit")
+//    public String EditJob(Job job) {
+//        job.setIsDelete(false);
+//        jobRepository.save(job);
+//        return "redirect:/data_job";
+//    }
+
+//    @GetMapping("/find_job")
+//    @ResponseBody
+//    public Job findJob(String id) {
+//        Job j = new Job(jobRepository.getJobById(id).get(0).getId(),
+//                jobRepository.getJobById(id).get(0).getName()
+//        );
+//        return j;
+//    }
+    @PostMapping("job_edit/{id}")
+    public String upadateData(@PathVariable("id") String id, @Valid Job job) {
         job.setIsDelete(false);
         jobRepository.save(job);
         return "redirect:/data_job";
-    }
-
-    @GetMapping("/find_job")
-    @ResponseBody
-    public Job findJob(String id) {
-        Job j = new Job(jobRepository.getJobById(id).get(0).getId(),
-                jobRepository.getJobById(id).get(0).getName()
-        );
-        return j;
     }
 
 //    @GetMapping("/data_job/{id}")

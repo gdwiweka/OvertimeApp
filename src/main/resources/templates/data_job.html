@@ -72,14 +72,15 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="Job:${dataJob}">
-                                            <td th:text="${Job.id}"></td>
-                                            <td th:text="${Job.name}"></td>
+                                            <td id="id" th:text="${Job.id}"></td>
+                                            <td id="name" th:text="${Job.name}"></td>
                                             <td class="center hidden-phone">
-                                                <button th:href="@{find_job/(id=${Job.id})}" class="btn btn-success btn btn-xs  btnEdit" ><i class="fa fa-edit"></i>Edit</button>&nbsp;
+                                                <!--<a th:href="@{/find_job/(id=${Job.id})}" class="btn btn-success btn btn-xs btnEdit"><i class="fa fa-edit" ></i>Edit</a>-->
+                                                <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>
+                                                    Edit</button>
                                                 <button class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash"></i>Delete</button>
                                             </td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -144,53 +145,39 @@
 
         <!-- Modal Edit -->
         <div class="myForm">
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Job</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form th:action="@{/job_edit}"class="form-horizontal style-form" method="post">
-                            <div class="form-group">
-                                <label for="id" class="col-sm-2 control-label">Job ID</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="id" name="id" placeholder="Job ID" readonly>
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Edit Job</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/job_edit/id}"class="form-horizontal style-form" method="post">
+                                <div class="form-group">
+                                    <label for="id" class="col-sm-2 control-label">Job ID</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="id" name="id" placeholder="Job ID" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">Job Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Job Name">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Job Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Job Name">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
         <!--Modal End-->
         
-        <script>
-            $(document).ready(function (){
-                $('.table .btnEdit').on('click', function (event){
-                    event.preventDefault();
-                    var href = $(this).attr('href');
-                    $.get(href, function(job, status){
-                        $('.myForm #id').val(job.id);
-                        $('.myForm #name').val(job.name);
-                    });
-                    $('.myForm #editModal').modal();
-                });
-            });
-        </script>
-
         <div th:replace="footer :: footer"></div>
     </body>
 

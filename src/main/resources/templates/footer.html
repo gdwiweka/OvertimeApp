@@ -31,6 +31,19 @@
                         });
                     });
                 </script>-->
+        
+        <script>
+            $(document).ready(function () {
+                $("#editModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _jobId = _row.find("#id").text();
+                    var _jobName = _row.find("#name").text();
+                    $(this).find("#id").val(_jobId);
+                    $(this).find("#name").val(_jobName);
+                })
+            })
+        </script>
 
         <!--sweet alert-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.0/dist/sweetalert2.all.min.js"></script>
@@ -281,6 +294,21 @@
                 todayHighlight: true
             });
         </script>
+        <!--        <script>
+                    $(document).ready(function () {
+                        $('.content-panel .btnEdit').on('click', function (event) {
+                            event.preventDefault();
+                            var href = $(this).attr('href');
+                            $.get(href, function (job, status) {
+                                $('.myForm #id').val(job.id);
+                                $('.myForm #name').val(job.name);
+                            });
+                            $('.myForm #editModal').modal();
+                        });
+                    });
+                </script>-->
+
+
 
     </div>
 </html>>
