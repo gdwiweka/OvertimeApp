@@ -111,7 +111,7 @@ public class MainController {
 
     @GetMapping("/data_employee")
     public String geAllEmployee(Model model) {
-        model.addAttribute("dataEmployee", employeeRepository.findAll());
+        model.addAttribute("dataEmployee", employeeRepository.getAll());
         model.addAttribute("employeeSave", new Employee());
         return "data_employee";
     }
@@ -129,13 +129,13 @@ public class MainController {
         employeeRepository.save(employee);
         return "redirect:/data_employee";
     }
-//    
-//    @PostMapping("employee_edit/{id}")
-//    public String updateEmployee(@PathVariable("id") String id, @Valid Employee employee) {
-//        employee.setIsDelete(false);
-//        employeeRepository.save(employee);
-//        return "redirect:/data_employee";
-//    }
+    
+    @PostMapping("employee_delete/{id}")
+    public String deleteEmployee(@PathVariable("id") String id, @Valid Employee employee) {
+        employee.setIsDelete(true);
+        employeeRepository.save(employee);
+        return "redirect:/data_employee";
+    }
 
     @GetMapping("/data_job")
     public String getAllJob(Model model) {
