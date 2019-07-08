@@ -10,6 +10,7 @@ import metrodatamii.metrodatamii.entities.Employee;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.entities.OvertimeRequest;
 import metrodatamii.metrodatamii.entities.OvertimeType;
+import metrodatamii.metrodatamii.entities.Status;
 import metrodatamii.metrodatamii.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -129,7 +130,7 @@ public class MainController {
         employeeRepository.save(employee);
         return "redirect:/data_employee";
     }
-    
+
     @PostMapping("employee_delete/{id}")
     public String deleteEmployee(@PathVariable("id") String id, @Valid Employee employee) {
         employee.setIsDelete(true);
@@ -157,35 +158,35 @@ public class MainController {
         jobRepository.save(job);
         return "redirect:/data_job";
     }
-    
+
     @PostMapping("job_delete/{id}")
     public String jobDelete(@PathVariable("id") String id, @Valid Job job) {
         job.setIsDelete(true);
         jobRepository.save(job);
         return "redirect:/data_job";
     }
-    
+
     @GetMapping("/data_overtime_type")
     public String getAllOvertimeType(Model model) {
         model.addAttribute("dataOvertimeType", overtimeTypeRepository.getAll());
         model.addAttribute("overtimeTypeSave", new OvertimeType());
         return "data_overtime_type";
     }
-    
+
     @PostMapping("/overtime_type_save")
     public String addDataOvertimeType(OvertimeType overtimeType) {
         overtimeType.setId("0");
         overtimeTypeRepository.save(overtimeType);
         return "redirect:/data_overtime_type";
     }
-    
+
     @PostMapping("overtime_type_edit/{id}")
     public String updateType(@PathVariable("id") String id, @Valid OvertimeType overtimeType) {
         overtimeType.setIsDelete(false);
         overtimeTypeRepository.save(overtimeType);
         return "redirect:/data_overtime_type";
     }
-    
+
     @PostMapping("overtime_type_delete/{id}")
     public String deleteType(@PathVariable("id") String id, @Valid OvertimeType overtimeType) {
         overtimeType.setIsDelete(true);
@@ -193,7 +194,72 @@ public class MainController {
         return "redirect:/data_overtime_type";
     }
 
-    
+    @GetMapping("/data_employee_role")
+    public String getAllEmployeeRole(Model model) {
+        String id = "2";
+        model.addAttribute("dataEmployeeRole", employeeRoleService.findAllEmployeeRole());
+        return "data_employee_role";
+    }
+
+//    EMPLOYEE PART START
+    @GetMapping("/emp_overtime_request")
+    public String getAllOvertimeRequest(Model model) {
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
+        model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
+        model.addAttribute("overtimeRequestSave", new OvertimeRequest());
+        return "emp_overtime_request";
+    }
+
+    @PostMapping("/emp_overtime_request_save")
+    public String addDataOvertimeRequest(OvertimeRequest overtimeRequest) {
+        overtimeRequest.setId("0");
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/emp_overtime_request";
+    }
+
+    @GetMapping("/emp_request_history")
+    public String getAllOvertimeRequestStatus(Model model) {
+        model.addAttribute("dataHistoryRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataEmployee", employeeRepository.getAll());
+        return "emp_request_history";
+    }
+//    EMPLOYEE PART END
+
+//    HRD PART START
+    @GetMapping("/mgr_approval_history")
+    public String getAllHistoryApproval(Model model) {
+        model.addAttribute("dataHistoryApproval", overtimeRequestRepository.findAll());
+//        model.addAttribute("dataEmployee", employeeRepository.getAll());
+        return "mgr_approval_history";
+    }
+
+    @GetMapping("/mgr_approval")
+    public String getAllApproval(Model model) {
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeType", overtimeTypeRepository.findAll());
+        model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
+        return "mgr_approval";
+    }
+
+    @PostMapping("approve/{id}")
+    public String updateApproval(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0002");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/mgr_approval";
+    }
+}   
+//    HRD PART END
+
+//    @RequestMapping(value = "/employee_save", method = RequestMethod.POST)
+//    public String save (@ModelAttribute("employeeSave") Employee employee){
+//        employeeService.save(employee);
+//        return "redirect:/data_employee";
+//    }
+
+
 //    @PostMapping("/job_edit")
 //    public String EditJob(Job job) {
 //        job.setIsDelete(false);
@@ -225,54 +291,3 @@ public class MainController {
 //        model.addAttribute("dataEmployeeJob", employeeJobService.findAllEmployeeJob());
 //        return "data_employee_job";
 //    }
-    @GetMapping("/data_employee_role")
-    public String getAllEmployeeRole(Model model) {
-        String id = "2";
-        model.addAttribute("dataEmployeeRole", employeeRoleService.findAllEmployeeRole());
-        return "data_employee_role";
-    }
-
-//    EMPLOYEE PART START
-    @GetMapping("/emp_overtime_request")
-    public String getAllOvertimeRequest(Model model) {
-        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
-        model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
-        model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
-        model.addAttribute("overtimeRequestSave", new OvertimeRequest());
-        return "emp_overtime_request";
-    }
-
-    @PostMapping("/emp_overtime_request_save")
-    public String addDataOvertimeRequest(OvertimeRequest overtimeRequest) {
-        overtimeRequest.setId("0");
-        overtimeRequestRepository.save(overtimeRequest);
-        return "redirect:/emp_overtime_request";
-    }
-
-    @GetMapping("/emp_request_history")
-    public String getAllOvertimeRequestStatus(Model model) {
-        model.addAttribute("dataHistoryRequest", overtimeRequestRepository.findAll());
-        return "emp_request_history";
-    }
-//    EMPLOYEE PART END
-
-//    HRD PART START
-    @GetMapping("/mgr_approval_history")
-    public String getAllHistoryApproval(Model model) {
-        model.addAttribute("dataHistoryApproval", overtimeRequestRepository.findAll());
-        return "mgr_approval_history";
-    }
-
-    @GetMapping("/mgr_approval")
-    public String getAllApproval(Model model) {
-        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
-        return "mgr_approval";
-    }
-//    HRD PART END
-
-//    @RequestMapping(value = "/employee_save", method = RequestMethod.POST)
-//    public String save (@ModelAttribute("employeeSave") Employee employee){
-//        employeeService.save(employee);
-//        return "redirect:/data_employee";
-//    }
-}

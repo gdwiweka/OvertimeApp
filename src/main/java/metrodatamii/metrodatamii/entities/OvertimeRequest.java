@@ -63,13 +63,13 @@ public class OvertimeRequest implements Serializable {
     @NotNull
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern="hh:mm:ss")
+    @DateTimeFormat(pattern="HH:mm:ss")
     private Date startTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern="hh:mm:ss")
+    @DateTimeFormat(pattern="HH:mm:ss")
     private Date endTime;
     @Basic(optional = false)
     @NotNull

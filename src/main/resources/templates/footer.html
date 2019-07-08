@@ -123,14 +123,36 @@
                     var _email = _row.find("#email").text();
                     var _phone = _row.find("#phoneNumber").text();
                     var _salary = _row.find("#salary").text();
-                    var _manager = _row.find("#manager").text();
                     $(this).find("#id").val(_id);
                     $(this).find("#firstName").val(_first);
                     $(this).find("#lastName").val(_last);
                     $(this).find("#email").val(_email);
                     $(this).find("#phoneNumber").val(_phone);
                     $(this).find("#salary").val(_salary);
-                    $(this).find("#manager").val(_manager);
+                })
+            })
+        </script>
+        
+        <script>
+            $(document).ready(function () {
+                $("#approveModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _id = _row.find("#id").text();
+//                    var _timeSheet = _row.find("#timeSheet").text();
+                    var _overtimeDate = _row.find("#overtimeDate").text();
+                    var _startTime = _row.find("#startTime").text();
+                    var _endTime = _row.find("#endTime").text();
+                    var _overtimeType = _row.find("#overtimeType").text();
+//                    var _totalHour = _row.find("#salary").text();
+                    var _activity = _row.find("#activity").text();
+                    $(this).find("#id").val(_id);
+//                    $(this).find("#timeSheet").val(_timeSheet);
+                    $(this).find("#overtimeDate").val(_overtimeDate);
+                    $(this).find("#startTime").val(_startTime);
+                    $(this).find("#endTime").val(_endTime);
+                    $(this).find("#activity").val(_activity);
+                    $(this).find("#overtimeType").val(_overtimeType);
                 })
             })
         </script>
@@ -307,29 +329,18 @@
                 /*
                  * Insert a 'details' column to the table
                  */
-                var nCloneTh = document.createElement('th');
-                var nCloneTd = document.createElement('td');
-                nCloneTd.innerHTML = '<img src="dist/lib/advanced-datatable/images/details_open.png">';
-                nCloneTd.className = "center";
-
-                $('#hidden-table-info thead tr').each(function () {
-                    this.insertBefore(nCloneTh, this.childNodes[0]);
-                });
-
-                $('#hidden-table-info tbody tr').each(function () {
-                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
-                });
+                
 
                 /*
                  * Initialse DataTables, with no sorting on the 'details' column
                  */
                 var oTable = $('#hidden-table-info').dataTable({
                     "aoColumnDefs": [{
-                            "bSortable": false,
+                            "bSortable": true,
                             "aTargets": [0]
                         }],
                     "aaSorting": [
-                        [1, 'asc']
+                        [0, 'asc']
                     ]
                 });
 
@@ -370,6 +381,7 @@
                 }
             });
         </script>
+        
         <script>
             jQuery('.default-date-picker').datepicker({
                 format: 'yyyy-dd-mm',
@@ -397,7 +409,9 @@
                         });
                     });
                 </script>-->
-
+        <script>
+            moment().format("hh:mm:ss");
+        </script>
 
 
     </div>
