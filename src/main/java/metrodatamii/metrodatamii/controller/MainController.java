@@ -5,11 +5,15 @@
  */
 package metrodatamii.metrodatamii.controller;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import metrodatamii.metrodatamii.entities.Account;
 import metrodatamii.metrodatamii.entities.Employee;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.entities.OvertimeRequest;
 import metrodatamii.metrodatamii.entities.OvertimeType;
+import metrodatamii.metrodatamii.repository.AccountRepository;
 import metrodatamii.metrodatamii.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +30,8 @@ import metrodatamii.metrodatamii.service.EmployeeJobService;
 import metrodatamii.metrodatamii.service.EmployeeRoleService;
 import metrodatamii.metrodatamii.service.JobService;
 import metrodatamii.metrodatamii.service.OvertimeTypeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +69,9 @@ public class MainController {
 
     @Autowired
     private JobRepository jobRepository;
+    
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     private OvertimeTypeRepository overtimeTypeRepository;
@@ -78,6 +87,11 @@ public class MainController {
 
     @GetMapping("/")
     public String index(Model model) {
+        return "login";
+    }
+    
+    @GetMapping("/login")
+    public String login(Model model) {
         return "login";
     }
 
@@ -96,6 +110,27 @@ public class MainController {
         return "mgr_dash";
     }
 
+    @GetMapping("/403")
+    public String error403(){
+        return "error/403";
+    }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET) 
+    public String handleError(HttpServletRequest request) {
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        if (status != null) {
+            Integer statusCode = Integer.valueOf(status.toString());
+
+            if (statusCode == HttpStatus.NOT_FOUND.value()) {
+                return "error/404";
+            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+                return "error/500";
+            }
+        }
+        return "error/error";
+    }
+    
     @GetMapping("/data_employee_job")
     public String geAllEmployeeJobRole(Model model) {
         model.addAttribute("dataEmployee", employeeRepository.findAll());
@@ -114,6 +149,17 @@ public class MainController {
         model.addAttribute("dataEmployee", employeeRepository.getAll());
         model.addAttribute("employeeSave", new Employee());
         return "data_employee";
+    }
+    
+    @PostMapping("/addDataAcc")
+    public String addAcc(String password, Account account) {
+        //account.setId("0");
+        account.setIsDelete("true");
+        account.setPassword(new BCryptPasswordEncoder().encode(password));
+        account.setIsActive("true");
+        accountRepository.save(account);
+        
+        return "redirect:/data_account";
     }
 
     @PostMapping("/employee_save")

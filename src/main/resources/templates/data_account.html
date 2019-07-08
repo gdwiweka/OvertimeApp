@@ -76,10 +76,10 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="Account:${dataAccount}">
-                                            <td th:text="${Account.id}"></td>
-                                            <td th:text="${Account.employee.firstName}"></td>
-                                            <td th:text="${Account.username}"></td>
-                                            <td th:text="${Account.isActive}"></td>
+                                            <td id="id" th:text="${Account.id}"></td>
+                                            <td id="firstName" th:text="${Account.employee.firstName}"></td>
+                                            <td id="lastName" th:text="${Account.username}"></td>
+                                            <td id="isActive" th:text="${Account.isActive}"></td>
                                             <td class="center hidden-phone">
                                                 <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i>Edit</button>&nbsp;
                                                 <button class="btn btn-danger btn-xs btnDelete"><i class="fa fa-trash"></i>Delete</button>
@@ -130,13 +130,13 @@
                         <h4 class="modal-title" id="myModalLabel">Add Account</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal style-form" method="post">
+                        <form class="form-horizontal style-form" th:action="@{/addDataAcc}" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Employee</label>
                                 <div class="col-sm-10">
-                                    <select name="employee" class="form-control">
+                                    <select name="id" id="id" class="form-control">
                                         <option value="">-- Select Employee --</option>
-                                        <option th:each="employee:${dataEmployee}" th:value="${employee.id}" th:text="${employee.firstName + ' ' + employee.lastName}"></option>
+                                        <option th:each="employee:${dataEmployee}" th:value="${employee.id}" th:text="${employee.id}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -152,12 +152,12 @@
                                     <input type="password" name="password" id="password" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <label class="col-sm-2 control-label">RePassword</label>
                                 <div class="col-sm-10">
                                     <input type="password" name="confirm_pass" class="form-control">
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Save</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -171,8 +171,57 @@
         </div>
         <!--Modal End-->
 
+        
+        <div class="modal fade" id="editAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Edit Account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal style-form" method="get">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Employee</label>
+                                <div class="col-sm-10">
+<!--                                    <select name="id" id="id" class="form-control">
+                                        <option value="">-- Select Employee --</option>
+                                        <option th:each="employee:${dataEmployee}" th:value="${employee.id}" th:text="${employee.id}"></option>
+                                    </select>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="username" id="username" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" id="password" class="form-control">
+                                </div>
+                            </div>
+<!--                            <div class="form-group">
+                                <label class="col-sm-2 control-label">RePassword</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="confirm_pass" class="form-control">
+                                </div>
+                            </div>-->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
         <!-- Modal Edit -->
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--        <div class="modal fade" id="editAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -218,7 +267,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!--Modal End-->
 
         <div th:replace="footer :: footer"></div>

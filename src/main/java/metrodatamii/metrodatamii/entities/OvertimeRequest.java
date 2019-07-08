@@ -27,11 +27,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author ASUS
+ * @author erik
  */
 @Entity
 @Table(name = "overtime_request")
@@ -57,34 +56,27 @@ public class OvertimeRequest implements Serializable {
     @NotNull
     @Column(name = "overtime_date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date overtimeDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern="hh:mm:ss")
     private Date startTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern="hh:mm:ss")
     private Date endTime;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "total_hour")
-    private int totalHour;
+    private Integer totalHour;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "activity")
     private String activity;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "o_salary")
-    private int oSalary;
+    private Integer oSalary;
     @Lob
     @Column(name = "doc")
     private byte[] doc;
@@ -107,14 +99,12 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
-    public OvertimeRequest(String id, Date overtimeDate, Date startTime, Date endTime, int totalHour, String activity, int oSalary) {
+    public OvertimeRequest(String id, Date overtimeDate, Date startTime, Date endTime, String activity) {
         this.id = id;
         this.overtimeDate = overtimeDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.totalHour = totalHour;
         this.activity = activity;
-        this.oSalary = oSalary;
     }
 
     public String getId() {
@@ -149,11 +139,11 @@ public class OvertimeRequest implements Serializable {
         this.endTime = endTime;
     }
 
-    public int getTotalHour() {
+    public Integer getTotalHour() {
         return totalHour;
     }
 
-    public void setTotalHour(int totalHour) {
+    public void setTotalHour(Integer totalHour) {
         this.totalHour = totalHour;
     }
 
@@ -165,11 +155,11 @@ public class OvertimeRequest implements Serializable {
         this.activity = activity;
     }
 
-    public int getOSalary() {
+    public Integer getOSalary() {
         return oSalary;
     }
 
-    public void setOSalary(int oSalary) {
+    public void setOSalary(Integer oSalary) {
         this.oSalary = oSalary;
     }
 

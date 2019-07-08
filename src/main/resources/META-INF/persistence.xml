@@ -19,8 +19,8 @@
     <class>metrodatamii.metrodatamii.entities.OvertimeRequest</class>
     <class>metrodatamii.metrodatamii.entities.Role</class>
     <class>metrodatamii.metrodatamii.entities.Employee</class>
-    <class>metrodatamii.metrodatamii.entities.Account</class>
     <class>metrodatamii.metrodatamii.entities.Status</class>
+    <class>metrodatamii.metrodatamii.entities.Account</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ASUS
+ * @author erik
  */
 @Entity
 @Table(name = "time_sheet")
@@ -53,10 +53,8 @@ public class TimeSheet implements Serializable {
     @Column(name = "period")
     @Temporal(TemporalType.DATE)
     private Date period;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "total_hour")
-    private int totalHour;
+    private Integer totalHour;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "timeSheet", fetch = FetchType.LAZY)
     private List<OvertimeRequest> overtimeRequestList;
     @JoinColumn(name = "employee", referencedColumnName = "id")
@@ -70,10 +68,9 @@ public class TimeSheet implements Serializable {
         this.id = id;
     }
 
-    public TimeSheet(Integer id, Date period, int totalHour) {
+    public TimeSheet(Integer id, Date period) {
         this.id = id;
         this.period = period;
-        this.totalHour = totalHour;
     }
 
     public Integer getId() {
@@ -92,11 +89,11 @@ public class TimeSheet implements Serializable {
         this.period = period;
     }
 
-    public int getTotalHour() {
+    public Integer getTotalHour() {
         return totalHour;
     }
 
-    public void setTotalHour(int totalHour) {
+    public void setTotalHour(Integer totalHour) {
         this.totalHour = totalHour;
     }
 
