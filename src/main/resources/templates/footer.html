@@ -144,9 +144,11 @@
                     var _startTime = _row.find("#startTime").text();
                     var _endTime = _row.find("#endTime").text();
                     var _overtimeType = _row.find("#overtimeType").text();
+                    var _typeName = _row.find("#typeName").text();
                     var _totalHour = _row.find("#totalHour").text();
                     var _activity = _row.find("#activity").text();
                     var _oSalary = _row.find("#oSalary").text();
+                    var _employee = _row.find("#employee").text();
                     $(this).find("#id").val(_id);
                     $(this).find("#timeSheet").val(_timeSheet);
                     $(this).find("#overtimeDate").val(_overtimeDate);
@@ -156,6 +158,8 @@
                     $(this).find("#overtimeType").val(_overtimeType);
                     $(this).find("#totalHour").val(_totalHour);
                     $(this).find("#oSalary").val(_oSalary);
+                    $(this).find("#typeName").val(_typeName);
+                    $(this).find("#employee").val(_employee);
                 })
             })
         </script>
@@ -171,8 +175,11 @@
                     var _startTime = _row.find("#startTime").text();
                     var _endTime = _row.find("#endTime").text();
                     var _overtimeType = _row.find("#overtimeType").text();
+                    var _typeName = _row.find("#typeName").text();
                     var _totalHour = _row.find("#totalHour").text();
                     var _activity = _row.find("#activity").text();
+                    var _oSalary = _row.find("#oSalary").text();
+                    var _employee = _row.find("#employee").text();
                     $(this).find("#id").val(_id);
                     $(this).find("#timeSheet").val(_timeSheet);
                     $(this).find("#overtimeDate").val(_overtimeDate);
@@ -181,6 +188,9 @@
                     $(this).find("#activity").val(_activity);
                     $(this).find("#overtimeType").val(_overtimeType);
                     $(this).find("#totalHour").val(_totalHour);
+                    $(this).find("#oSalary").val(_oSalary);
+                    $(this).find("#typeName").val(_typeName);
+                    $(this).find("#employee").val(_employee);
                 })
             })
         </script>
@@ -196,9 +206,11 @@
                     var _startTime = _row.find("#startTime").text();
                     var _endTime = _row.find("#endTime").text();
                     var _overtimeType = _row.find("#overtimeType").text();
+                    var _typeName = _row.find("#typeName").text();
                     var _totalHour = _row.find("#totalHour").text();
                     var _activity = _row.find("#activity").text();
                     var _oSalary = _row.find("#oSalary").text();
+                    var _employee = _row.find("#employee").text();
                     $(this).find("#id").val(_id);
                     $(this).find("#timeSheet").val(_timeSheet);
                     $(this).find("#overtimeDate").val(_overtimeDate);
@@ -208,6 +220,8 @@
                     $(this).find("#overtimeType").val(_overtimeType);
                     $(this).find("#totalHour").val(_totalHour);
                     $(this).find("#oSalary").val(_oSalary);
+                    $(this).find("#typeName").val(_typeName);
+                    $(this).find("#employee").val(_employee);
                 })
             })
         </script>
@@ -215,6 +229,40 @@
         <script>
             $(document).ready(function () {
                 $("#detailApprovalModal").on('show.bs.modal', function (e) {
+                    var _button = $(e.relatedTarget);
+                    var _row = _button.parents("tr");
+                    var _id = _row.find("#id").text();
+                    var _timeSheet = _row.find("#timeSheet").text();
+                    var _overtimeDate = _row.find("#overtimeDate").text();
+                    var _employee = _row.find("#employee").text();
+                    var _startTime = _row.find("#startTime").text();
+                    var _endTime = _row.find("#endTime").text();
+                    var _overtimeType = _row.find("#overtimeType").text();
+                    var _totalHour = _row.find("#totalHour").text();
+                    var _activity = _row.find("#activity").text();
+                    var _doc = _row.find("#doc").text();
+                    var _status = _row.find("#status").text();
+                    var _oSalary = _row.find("#oSalary").text();
+                    $(this).find("#id").val(_id);
+                    $(this).find("#timeSheet").val(_timeSheet);
+                    $(this).find("#employee").val(_employee);
+                    $(this).find("#overtimeDate").val(_overtimeDate);
+                    $(this).find("#startTime").val(_startTime);
+                    $(this).find("#endTime").val(_endTime);
+                    $(this).find("#overtimeType").val(_overtimeType);
+                    $(this).find("#totalHour").val(_totalHour);
+                    $(this).find("#activity").val(_activity);
+                    $(this).find("#overtimeType").val(_overtimeType);
+                    $(this).find("#doc").val(_doc);
+                    $(this).find("#status").val(_status);
+                    $(this).find("#oSalary").val(_oSalary);
+                })
+            })
+        </script>
+        
+        <script>
+            $(document).ready(function () {
+                $("#detailReqModal").on('show.bs.modal', function (e) {
                     var _button = $(e.relatedTarget);
                     var _row = _button.parents("tr");
                     var _id = _row.find("#id").text();

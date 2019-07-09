@@ -56,32 +56,41 @@
                                 <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Time Sheet</th>
+                                            <th >ID</th>
+                                            <th >Time Sheet</th>
+                                            <th>Employee</th>
                                             <th>Date</th>
                                             <th>Start</th>
                                             <th>End</th>
                                             <th>Hour</th>
                                             <th>Activity</th>
                                             <th>Type</th>
-                                            <th>Document</th>
                                             <th>Status</th>
-                                            <th class="hidden-phone" width="10%">Action</th>
+                                            <th hidden></th>
+                                            <th hidden></th>
+                                            <th hidden></th>
+                                            <th class="hidden-phone" width="22%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="OReq:${dataOvertimeRequest}">
-                                            <td id="id" th:text="${OReq.id}"></td>
+                                            <td width="7% " id="id" th:text="${OReq.id}"></td>
                                             <td id="timeSheet" th:text="${OReq.timeSheet.id}"></td>
+                                            <td id="employee" th:text="${OReq.timeSheet.employee.firstName}"></td>
                                             <td id="overtimeDate" th:text="${OReq.overtimeDate}"></td>
                                             <td id="startTime" th:text="${OReq.startTime}"></td>
                                             <td id="endTime" th:text="${OReq.endTime}"></td>
                                             <td id="totalHour" th:text="${OReq.totalHour}"></td>
                                             <td id="activity" th:text="${OReq.activity}"></td>
-                                            <td id="overtimeType" th:text="${OReq.overtimeType.name}"></td>
-                                            <td id="doc" th:text="${OReq.doc}"></td>
+                                            <td id="typeName" th:text="${OReq.overtimeType.name}"></td>
                                             <td id="status" th:text="${OReq.status.name}"></td>
+                                            <td hidden id="overtimeType" th:text="${OReq.overtimeType.id}"></td>
+                                            <td hidden id="doc" th:text="${OReq.doc}"></td>
+                                            <td hidden id="oSalary" th:text="${OReq.oSalary}"></td>
+
+
                                             <td class="center hidden-phone">
+                                                <button class="btn btn-info btn btn-xs" data-toggle="modal" data-target="#detailReqModal"><i class="fa fa-search-plus"></i>Detail</button>&nbsp;
                                                 <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#cancelModal"><i class="fa fa-times"></i>
                                                     Cancel</button>
                                             </td>
@@ -223,7 +232,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Approve Overtime Request</h4>
+                        <h4 class="modal-title" id="myModalLabel">Reject Overtime Request</h4>
                     </div>
                     <div class="modal-body">
                         <form th:action="@{/cancel/id}" class="form-horizontal style-form" method="post">
@@ -232,39 +241,146 @@
                                 <div class="col-sm-3">
                                     <input type="text" name="id" id="id"  class="form-control" readonly>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Date</label>
                                 <div class="col-sm-4">
                                     <input type="date" name="overtimeDate" id="overtimeDate"  class="form-control" readonly>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Start</label>
                                 <div class="col-sm-4">
                                     <div class="input-group bootstrap-timepicker">
-                                        <input name="startTime" id="startTime" type="text" class="form-control timepicker-24">
+                                        <input name="startTime" id="startTime" type="text" class="form-control timepicker-24" readonly>
                                     </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="input-group bootstrap-timepicker">
-                                        <input name="endTime" id="endTime" type="text" class="form-control timepicker-24">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1">
-                                    <input type="hidden" name="activity" id="activity"  class="form-control" readonly>
-                                </div>
-                                <div class="col-sm-4">
-                                    <select name="timeSheet" id="timeSheet" class="form-control">
-                                        <option value="">-- Select Timesheet --</option>
-                                        <option th:each="data:${dataTimeSheet}" th:value="${data.id}" th:text="${data.id}"></option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-10">
-                                    <select name="overtimeType" id="overtimeType" class="form-control">
-                                        <option value="">-- Select Overtime Type --</option>
-                                        <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.id}"></option>
-                                    </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">End</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input name="endTime" id="endTime" type="text" class="form-control timepicker-24" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Activity</label>
+                                <div class="col-sm-4">
+                                    <input name="activity" id="activity"  class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <select hidden name="timeSheet" id="timeSheet" class="form-control" style="visibility: hidden">
+                                    <option value="">-- Select Timesheet --</option>
+                                    <option th:each="data:${dataTimeSheet}" th:value="${data.id}" th:text="${data.id}"></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select name="overtimeType" id="overtimeType" class="form-control" style="visibility: hidden">
+                                    <option value="">-- Select Overtime Type --</option>
+                                    <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                </select>
+                            </div>
+                    </div>
 
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Modal End-->
+
+        <!-- Modal Detail -->
+        <div class="modal fade" id="detailReqModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Detail Request</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal style-form">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">ID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="id" id="id"  class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Employee</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="employee" id="employee"  class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">TimeSheet</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="timeSheet" id="timeSheet" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Date</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="overtimeDate" id="overtimeDate" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Start Time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="startTime" id="startTime" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">End Time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="endTime" id="endTime" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Total Hour</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="totalHour" id="totalHour" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="overtimeType" id="overtimeType" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Activity</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="activity" id="activity" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Document</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="doc" id="doc" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Status</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="status" id="status" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <!--                            <div class="form-group">
+                                                            <label for="manager" class="col-sm-2 control-label">Manager</label>
+                                                            <div class="col-sm-10">
+                                                                <select name="manager" id="manager" class="form-control">
+                                                                    <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>-->
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-danger">Cancel</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <!--<button type="submit" class="btn btn-primary">Save</button>-->
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </form>
                     </div>
