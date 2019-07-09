@@ -64,7 +64,7 @@
                                     <tbody>
                                         <tr th:each="requestHistory:${dataHistoryRequest}">
                                             <td th:text="${requestHistory.id}"></td>
-                                            <td data-type="month" th:text="${requestHistory.timeSheet.period}"></td>
+                                            <td data-type="month" th:text="${requestHistory.timeSheet.id}"></td>
                                             <td th:text="${requestHistory.timeSheet.employee.firstName}"></td>
                                             <td>
                                                 <a th:each="list:${requestHistory.overtimeRequestStatusList}">

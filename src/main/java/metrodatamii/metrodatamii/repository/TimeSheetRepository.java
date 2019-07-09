@@ -16,6 +16,6 @@ import org.springframework.stereotype.Repository;
  * @author WIN7
  */
 @Repository
-public interface TimeSheetRepository extends CrudRepository<TimeSheet, Integer> {
+public interface TimeSheetRepository extends CrudRepository<TimeSheet, String> {
     
 }

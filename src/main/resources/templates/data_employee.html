@@ -75,7 +75,6 @@
                                             <th class="hidden-phone">Phone Number</th>
                                             <th class="hidden-phone">Salary</th>
                                             <th class="hidden-phone">Manager</th>
-                                            <th class="hidden-phone">Is Delete</th>
                                             <th class="hidden-phone" width="15%">Action</th>
                                         </tr>
                                     </thead>
@@ -88,7 +87,6 @@
                                             <td id="phoneNumber" th:text="${Employee.phoneNumber}"></td>
                                             <td id="salary" th:text="${Employee.salary}"></td>
                                             <td id="manager" th:text="${Employee.manager.firstName}"></td>
-                                            <td id="isDelete" th:text="${Employee.isDelete}"></td>
                                             <td class="center hidden-phone">
                                                 <button class="btn btn-success btn btn-xs" data-toggle="modal" data-target="#editEmpModal"><i class="fa fa-edit"></i>Edit</button>&nbsp;
                                                 <button class="btn btn-danger btn btn-xs" data-toggle="modal" data-target="#deleteEmpModal"><i class="fa fa-edit"></i>Delete</button>&nbsp;
@@ -239,8 +237,7 @@
                             <div class="form-group">
                                 <label for="manager" class="col-sm-2 control-label">Manager</label>
                                 <div class="col-sm-10">
-                                    <select name="manager" id="manager" class="form-control">
-                                        <option value="">-- Select Manager --</option>
+                                    <select name="manager" id="selectMgr" class="form-control">
                                         <option th:each="data:${dataEmployee}" th:value="${data.id}" th:text="${data.firstName}"></option>
                                     </select>
                                 </div>
@@ -272,7 +269,7 @@
                                     <input type="text" class="form-control" id="id" name="id" placeholder="Employee ID" readonly>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" name="firstName" id="firstName"  class="form-control">
+                                    <input type="text" name="firstName" id="firstName"  class="form-control" readonly>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="hidden" name="lastName" id="lastName"  class="form-control">

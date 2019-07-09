@@ -217,6 +217,15 @@ public class MainController {
         overtimeRequestRepository.save(overtimeRequest);
         return "redirect:/emp_overtime_request";
     }
+    
+    @PostMapping("cancel/{id}")
+    public String updateCancel(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0004");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/emp_overtime_request";
+    }
 
     @GetMapping("/emp_request_history")
     public String getAllOvertimeRequestStatus(Model model) {
@@ -246,6 +255,15 @@ public class MainController {
     public String updateApproval(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
         Status status = new Status();
         status.setId("S-0002");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/mgr_approval";
+    }
+    
+    @PostMapping("reject/{id}")
+    public String updateReject(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0003");
         overtimeRequest.setStatus(status);
         overtimeRequestRepository.save(overtimeRequest);
         return "redirect:/mgr_approval";

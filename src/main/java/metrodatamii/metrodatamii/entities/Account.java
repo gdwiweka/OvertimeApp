@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
     , @NamedQuery(name = "Account.findByIsDelete", query = "SELECT a FROM Account a WHERE a.isDelete = :isDelete")
-    , @NamedQuery(name = "Account.findByIsActive", query = "SELECT a FROM Account a WHERE a.isActive = :isActive")})
+    , @NamedQuery(name = "Account.findByIsActive", query = "SELECT a FROM Account a WHERE a.isActive = :isActive")
+    , @NamedQuery(name = "Account.findByToken", query = "SELECT a FROM Account a WHERE a.token = :token")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +52,7 @@ public class Account implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
     @Lob
@@ -59,12 +60,19 @@ public class Account implements Serializable {
     private byte[] image;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "is_delete")
-    private boolean isDelete;
+    private String isDelete;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 5)
     @Column(name = "is_active")
-    private boolean isActive;
+    private String isActive;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 230)
+    @Column(name = "token")
+    private String token;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false, fetch = FetchType.LAZY)
     private Employee employee;
@@ -76,12 +84,13 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(String id, String username, String password, boolean isDelete, boolean isActive) {
+    public Account(String id, String username, String password, String isDelete, String isActive, String token) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.isDelete = isDelete;
         this.isActive = isActive;
+        this.token = token;
     }
 
     public String getId() {
@@ -116,20 +125,28 @@ public class Account implements Serializable {
         this.image = image;
     }
 
-    public boolean getIsDelete() {
+    public String getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(boolean isDelete) {
+    public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
     }
 
-    public boolean getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
+    public void setIsActive(String isActive) {
         this.isActive = isActive;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Employee getEmployee() {

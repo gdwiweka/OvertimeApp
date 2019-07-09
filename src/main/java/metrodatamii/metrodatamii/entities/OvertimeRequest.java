@@ -71,34 +71,30 @@ public class OvertimeRequest implements Serializable {
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern="HH:mm:ss")
     private Date endTime;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "total_hour")
-    private int totalHour;
+    private Integer totalHour;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "activity")
     private String activity;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "o_salary")
-    private int oSalary;
+    private Integer oSalary;
     @Lob
     @Column(name = "doc")
     private byte[] doc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "overtimeRequest", fetch = FetchType.LAZY)
     private List<OvertimeRequestStatus> overtimeRequestStatusList;
-    @JoinColumn(name = "time_sheet", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private TimeSheet timeSheet;
     @JoinColumn(name = "overtime_type", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OvertimeType overtimeType;
     @JoinColumn(name = "status", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Status status;
+    @JoinColumn(name = "time_sheet", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private TimeSheet timeSheet;
 
     public OvertimeRequest() {
     }
@@ -107,14 +103,12 @@ public class OvertimeRequest implements Serializable {
         this.id = id;
     }
 
-    public OvertimeRequest(String id, Date overtimeDate, Date startTime, Date endTime, int totalHour, String activity, int oSalary) {
+    public OvertimeRequest(String id, Date overtimeDate, Date startTime, Date endTime, String activity) {
         this.id = id;
         this.overtimeDate = overtimeDate;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.totalHour = totalHour;
         this.activity = activity;
-        this.oSalary = oSalary;
     }
 
     public String getId() {
@@ -149,11 +143,11 @@ public class OvertimeRequest implements Serializable {
         this.endTime = endTime;
     }
 
-    public int getTotalHour() {
+    public Integer getTotalHour() {
         return totalHour;
     }
 
-    public void setTotalHour(int totalHour) {
+    public void setTotalHour(Integer totalHour) {
         this.totalHour = totalHour;
     }
 
@@ -165,11 +159,11 @@ public class OvertimeRequest implements Serializable {
         this.activity = activity;
     }
 
-    public int getOSalary() {
+    public Integer getOSalary() {
         return oSalary;
     }
 
-    public void setOSalary(int oSalary) {
+    public void setOSalary(Integer oSalary) {
         this.oSalary = oSalary;
     }
 
@@ -190,14 +184,6 @@ public class OvertimeRequest implements Serializable {
         this.overtimeRequestStatusList = overtimeRequestStatusList;
     }
 
-    public TimeSheet getTimeSheet() {
-        return timeSheet;
-    }
-
-    public void setTimeSheet(TimeSheet timeSheet) {
-        this.timeSheet = timeSheet;
-    }
-
     public OvertimeType getOvertimeType() {
         return overtimeType;
     }
@@ -212,6 +198,14 @@ public class OvertimeRequest implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public TimeSheet getTimeSheet() {
+        return timeSheet;
+    }
+
+    public void setTimeSheet(TimeSheet timeSheet) {
+        this.timeSheet = timeSheet;
     }
 
     @Override

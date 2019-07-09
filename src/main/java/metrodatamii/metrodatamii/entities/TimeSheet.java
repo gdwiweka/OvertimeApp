@@ -6,15 +6,12 @@
 package metrodatamii.metrodatamii.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,9 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -38,25 +34,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "TimeSheet.findAll", query = "SELECT t FROM TimeSheet t")
     , @NamedQuery(name = "TimeSheet.findById", query = "SELECT t FROM TimeSheet t WHERE t.id = :id")
-    , @NamedQuery(name = "TimeSheet.findByPeriod", query = "SELECT t FROM TimeSheet t WHERE t.period = :period")
     , @NamedQuery(name = "TimeSheet.findByTotalHour", query = "SELECT t FROM TimeSheet t WHERE t.totalHour = :totalHour")})
 public class TimeSheet implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "id")
-    private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "period")
-    @Temporal(TemporalType.DATE)
-    private Date period;
-    @Basic(optional = false)
-    @NotNull
+    private String id;
     @Column(name = "total_hour")
-    private int totalHour;
+    private Integer totalHour;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "timeSheet", fetch = FetchType.LAZY)
     private List<OvertimeRequest> overtimeRequestList;
     @JoinColumn(name = "employee", referencedColumnName = "id")
@@ -66,37 +55,23 @@ public class TimeSheet implements Serializable {
     public TimeSheet() {
     }
 
-    public TimeSheet(Integer id) {
+    public TimeSheet(String id) {
         this.id = id;
     }
 
-    public TimeSheet(Integer id, Date period, int totalHour) {
-        this.id = id;
-        this.period = period;
-        this.totalHour = totalHour;
-    }
-
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Date getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(Date period) {
-        this.period = period;
-    }
-
-    public int getTotalHour() {
+    public Integer getTotalHour() {
         return totalHour;
     }
 
-    public void setTotalHour(int totalHour) {
+    public void setTotalHour(Integer totalHour) {
         this.totalHour = totalHour;
     }
 
