@@ -204,7 +204,7 @@ public class MainController {
 //    EMPLOYEE PART START
     @GetMapping("/emp_overtime_request")
     public String getAllOvertimeRequest(Model model) {
-        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.getAll());
         model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
         model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
         model.addAttribute("overtimeRequestSave", new OvertimeRequest());
@@ -245,7 +245,7 @@ public class MainController {
 
     @GetMapping("/mgr_approval")
     public String getAllApproval(Model model) {
-        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.getAll());
         model.addAttribute("dataOvertimeType", overtimeTypeRepository.findAll());
         model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
         return "mgr_approval";

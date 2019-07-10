@@ -45,14 +45,10 @@ public class Account implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id")
     private String id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @Size(max = 20)
     @Column(name = "username")
     private String username;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
     @Lob
@@ -68,9 +64,7 @@ public class Account implements Serializable {
     @Size(min = 1, max = 5)
     @Column(name = "is_active")
     private String isActive;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 230)
+    @Size(max = 230)
     @Column(name = "token")
     private String token;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -84,13 +78,10 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(String id, String username, String password, String isDelete, String isActive, String token) {
+    public Account(String id, String isDelete, String isActive) {
         this.id = id;
-        this.username = username;
-        this.password = password;
         this.isDelete = isDelete;
         this.isActive = isActive;
-        this.token = token;
     }
 
     public String getId() {
