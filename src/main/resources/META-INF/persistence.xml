@@ -12,7 +12,6 @@
     <class>metrodatamii.metrodatamii.entities.EmployeeRole</class>
     <class>metrodatamii.metrodatamii.entities.Job</class>
     <class>metrodatamii.metrodatamii.entities.Parameter</class>
-    <class>metrodatamii.metrodatamii.entities.TimeSheet</class>
     <class>metrodatamii.metrodatamii.entities.OvertimeRequestStatus</class>
     <class>metrodatamii.metrodatamii.entities.EmployeeJob</class>
     <class>metrodatamii.metrodatamii.entities.OvertimeType</class>
@@ -21,6 +20,7 @@
     <class>metrodatamii.metrodatamii.entities.Employee</class>
     <class>metrodatamii.metrodatamii.entities.Status</class>
     <class>metrodatamii.metrodatamii.entities.Account</class>
+    <class>metrodatamii.metrodatamii.entities.TimeSheet</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

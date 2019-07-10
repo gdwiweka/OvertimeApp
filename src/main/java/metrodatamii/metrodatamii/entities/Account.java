@@ -88,6 +88,14 @@ public class Account implements Serializable {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public Account(String id, String username, String password, String isDelete, String isActive, String token) {
         this.id = id;
         this.username = username;
@@ -98,14 +106,6 @@ public class Account implements Serializable {
     }
     
     
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
 
     public void setUsername(String username) {
         this.username = username;
