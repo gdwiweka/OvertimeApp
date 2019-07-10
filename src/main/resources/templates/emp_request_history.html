@@ -54,8 +54,9 @@
                                 <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
+                                            <th>ID Request</th>
+                                            <th>Timesheet</th>
+                                            <th>Employee</th>
                                             <th>Status</th>
                                             <th>Status Date</th>
                                         </tr>
@@ -63,6 +64,7 @@
                                     <tbody>
                                         <tr th:each="requestHistory:${dataHistoryRequest}">
                                             <td th:text="${requestHistory.id}"></td>
+                                            <td data-type="month" th:text="${requestHistory.timeSheet.id}"></td>
                                             <td th:text="${requestHistory.timeSheet.employee.firstName}"></td>
                                             <td>
                                                 <a th:each="list:${requestHistory.overtimeRequestStatusList}">

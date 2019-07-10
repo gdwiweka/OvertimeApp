@@ -13,6 +13,7 @@ import metrodatamii.metrodatamii.entities.Employee;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.entities.OvertimeRequest;
 import metrodatamii.metrodatamii.entities.OvertimeType;
+import metrodatamii.metrodatamii.entities.Status;
 import metrodatamii.metrodatamii.repository.AccountRepository;
 import metrodatamii.metrodatamii.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -238,6 +239,8 @@ public class MainController {
         overtimeTypeRepository.save(overtimeType);
         return "redirect:/data_overtime_type";
     }
+    
+    
 
     
 //    @PostMapping("/job_edit")
@@ -294,10 +297,20 @@ public class MainController {
         overtimeRequestRepository.save(overtimeRequest);
         return "redirect:/emp_overtime_request";
     }
+    
+    @PostMapping("cancel/{id}")
+    public String updateCancel(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0004");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/emp_overtime_request";
+    }
 
     @GetMapping("/emp_request_history")
     public String getAllOvertimeRequestStatus(Model model) {
         model.addAttribute("dataHistoryRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataEmployee", employeeRepository.getAll());
         return "emp_request_history";
     }
 //    EMPLOYEE PART END
@@ -312,7 +325,27 @@ public class MainController {
     @GetMapping("/mgr_approval")
     public String getAllApproval(Model model) {
         model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeType", overtimeTypeRepository.findAll());
+        model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
         return "mgr_approval";
+    }
+    
+    @PostMapping("approve/{id}")
+    public String updateApproval(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0002");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/mgr_approval";
+    }
+    
+    @PostMapping("reject/{id}")
+    public String updateReject(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0003");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/mgr_approval";
     }
 //    HRD PART END
 
