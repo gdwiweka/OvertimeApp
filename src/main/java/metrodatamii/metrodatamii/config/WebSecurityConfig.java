@@ -102,6 +102,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home","/forget/**", "/confirm/**").permitAll() //bintang 1 permit ALL
                 .antMatchers("/dist/**").permitAll()                               //bintang 2 permit ALL must Login
                 .antMatchers("/adm_dash/**").hasAnyAuthority("admin")
+                .antMatchers("/emp_dash/**").hasAnyAuthority("employee")
+                .antMatchers("/mgr_dash/**").hasAnyAuthority("manager")
                 .antMatchers("/user/**").hasAnyAuthority("USER")
                 .anyRequest().authenticated()
                 .and()
