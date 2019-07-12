@@ -5,9 +5,11 @@
  */
 package metrodatamii.metrodatamii.repository;
 
+import java.util.List;
 import metrodatamii.metrodatamii.entities.Job;
 import metrodatamii.metrodatamii.entities.OvertimeRequest;
 import metrodatamii.metrodatamii.entities.OvertimeType;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +19,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OvertimeRequestRepository extends CrudRepository<OvertimeRequest, String> {
-    
+    @Query(value = "SELECT * FROM overtime_request WHERE status = 'S-0001'", nativeQuery = true)
+    List<OvertimeRequest> getAll();
 }

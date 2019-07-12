@@ -17,12 +17,22 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered"><a data-toggle="modal" data-target="#profileModal"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-                        <h5 class="centered">Employee</h5>
+                        <h5 class="centered">Manager</h5>
                         <li class="mt">
-                            <a href="emp_dash">
+                            <a href="mgr_dash">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span>Overtime Approval</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="mgr_approval">Overtime Approval</a></li>
+                                <li><a href="mgr_approval_history">Approval History</a></li>
+                            </ul>
                         </li>
                         <li class="sub-menu">
                             <a class="active" href="javascript:;">
@@ -30,8 +40,8 @@
                                 <span>Overtime Request</span>
                             </a>
                             <ul class="sub">
-                                <li class="active"><a href="emp_overtime_request">Overtime Request</a></li>
-                                <li><a href="emp_request_history">History Request</a></li>
+                                <li class="active"><a href="mgr_overtime_request">Overtime Request</a></li>
+                                <li><a href="mgr_request_history">History Request</a></li>
                             </ul>
                         </li>
 
@@ -140,7 +150,7 @@
                         <h4 class="modal-title" id="myModalLabel">Add Overtime Request</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/emp_overtime_request_save}" class="form-horizontal style-form" method="post" id="formID" autocomplete="off">
+                        <form th:action="@{/mgr_overtime_request_save}" class="form-horizontal style-form" method="post" id="formID" autocomplete="off">
                             <div class="form-group">
                                 <label for="timeSheet" class="col-sm-2 control-label">Time Sheet</label>
                                 <div class="col-sm-10">
@@ -158,7 +168,7 @@
                                 </div>
                             </div>
 
-                            
+
 
                             <div class="form-group">
                                 <label for="startTime" class="control-label col-sm-2">Start Time</label>
@@ -166,7 +176,7 @@
                                     <div class="input-group bootstrap-timepicker">
                                         <input name="startTime" id="startTime" type="text" class="form-control timepicker-24">
                                         <span class="input-group-btn add-on">
-                                            <button class="btn btn-theme04 add" type="button"><i class="fa fa-clock-o"></i></button>
+                                            <button class="btn btn-theme04" type="button"><i class="fa fa-clock-o"></i></button>
                                         </span>
                                     </div>
                                 </div>
@@ -191,7 +201,7 @@
                                     <input name="totalHour" id="totalHour" class="form-control" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="overtimeType" class="col-sm-2 control-label">Type</label>
                                 <div class="col-sm-10">
@@ -201,14 +211,14 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="oSalary" class="col-sm-2 control-label">Overtime Salary</label>
                                 <div class="col-sm-10" >
                                     <input name="oSalary" id="oSalary" class="form-control" readonly>
                                 </div>
                             </div>
-                            
+
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Document</label>
@@ -233,7 +243,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" onclick="swAlert">Save</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
@@ -252,7 +262,7 @@
                         <h4 class="modal-title" id="myModalLabel">Reject Overtime Request</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/cancel/id}" class="form-horizontal style-form" method="post">
+                        <form th:action="@{/mgr_cancel/id}" class="form-horizontal style-form" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">ID</label>
                                 <div class="col-sm-3">

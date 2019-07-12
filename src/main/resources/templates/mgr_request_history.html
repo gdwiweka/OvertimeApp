@@ -17,12 +17,22 @@
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
                         <p class="centered"><a data-toggle="modal" data-target="#profileModal"><img src="dist/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-                        <h5 class="centered">Employee</h5>
+                        <h5 class="centered">Manager</h5>
                         <li class="mt">
-                            <a href="emp_dash">
+                            <a href="mgr_dash">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span>Overtime Approval</span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="mgr_approval">Overtime Approval</a></li>
+                                <li><a href="mgr_approval_history">Approval History</a></li>
+                            </ul>
                         </li>
                         <li class="sub-menu">
                             <a class="active" href="javascript:;">
@@ -30,8 +40,8 @@
                                 <span>Overtime Request</span>
                             </a>
                             <ul class="sub">
-                                <li class="active"><a href="emp_overtime_request">Overtime Request</a></li>
-                                <li><a href="emp_request_history">History Request</a></li>
+                                <li><a href="mgr_overtime_request">Overtime Request</a></li>
+                                <li class="active"><a href="mgr_request_history">History Request</a></li>
                             </ul>
                         </li>
 
@@ -46,53 +56,33 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <h3><i class="fa fa-angle-right"></i> Table Overtime Request </h3>
+                    <h3><i class="fa fa-angle-right"></i> Table Overtime Request Status</h3>
                     <div class="row mb">
                         <!-- page start-->
                         <div class="content-panel">
-                            &nbsp;<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Add Request</button><br><br>
-
                             <div class="adv-table">
                                 <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                                     <thead>
                                         <tr>
-                                            <th >ID</th>
-                                            <th >Time Sheet</th>
+                                            <th>ID Request</th>
+                                            <th>Timesheet</th>
                                             <th>Employee</th>
-                                            <th>Date</th>
-                                            <th>Start</th>
-                                            <th>End</th>
-                                            <th>Hour</th>
-                                            <th>Activity</th>
-                                            <th>Type</th>
                                             <th>Status</th>
-                                            <th hidden></th>
-                                            <th hidden></th>
-                                            <th hidden></th>
-                                            <th class="hidden-phone" width="22%">Action</th>
+                                            <th>Status Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="OReq:${dataOvertimeRequest}">
-                                            <td width="7% " id="id" th:text="${OReq.id}"></td>
-                                            <td id="timeSheet" th:text="${OReq.timeSheet.id}"></td>
-                                            <td id="employee" th:text="${OReq.timeSheet.employee.firstName}"></td>
-                                            <td id="overtimeDate" th:text="${OReq.overtimeDate}"></td>
-                                            <td id="startTime" th:text="${OReq.startTime}"></td>
-                                            <td id="endTime" th:text="${OReq.endTime}"></td>
-                                            <td id="totalHour" th:text="${OReq.totalHour}"></td>
-                                            <td id="activity" th:text="${OReq.activity}"></td>
-                                            <td id="typeName" th:text="${OReq.overtimeType.name}"></td>
-                                            <td id="status" th:text="${OReq.status.name}"></td>
-                                            <td hidden id="overtimeType" th:text="${OReq.overtimeType.id}"></td>
-                                            <td hidden id="doc" th:text="${OReq.doc}"></td>
-                                            <td hidden id="oSalary" th:text="${OReq.oSalary}"></td>
-
-
-                                            <td class="center hidden-phone">
-                                                <button class="btn btn-info btn btn-xs" data-toggle="modal" data-target="#detailReqModal"><i class="fa fa-search-plus"></i>Detail</button>&nbsp;
-                                                <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#cancelModal"><i class="fa fa-times"></i>
-                                                    Cancel</button>
+                                        <tr th:each="requestHistory:${dataHistoryRequest}">
+                                            <td th:text="${requestHistory.id}"></td>
+                                            <td data-type="month" th:text="${requestHistory.timeSheet.id}"></td>
+                                            <td th:text="${requestHistory.timeSheet.employee.firstName}"></td>
+                                            <td>
+                                                <a th:each="list:${requestHistory.overtimeRequestStatusList}">
+                                                    <p th:text="${list.status.name}"></p></a>
+                                            </td>
+                                            <td>
+                                                <a th:each="list:${requestHistory.overtimeRequestStatusList}">
+                                                    <p th:text="${list.statusDate}"></p></a>
                                             </td>
                                         </tr>
 
@@ -140,7 +130,7 @@
                         <h4 class="modal-title" id="myModalLabel">Add Overtime Request</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/emp_overtime_request_save}" class="form-horizontal style-form" method="post" id="formID" autocomplete="off">
+                        <form th:action="@{/mgr_overtime_request_save}" class="form-horizontal style-form" method="post" id="formID" autocomplete="off">
                             <div class="form-group">
                                 <label for="timeSheet" class="col-sm-2 control-label">Time Sheet</label>
                                 <div class="col-sm-10">
@@ -158,15 +148,13 @@
                                 </div>
                             </div>
 
-                            
-
                             <div class="form-group">
                                 <label for="startTime" class="control-label col-sm-2">Start Time</label>
                                 <div class="col-sm-10">
                                     <div class="input-group bootstrap-timepicker">
                                         <input name="startTime" id="startTime" type="text" class="form-control timepicker-24">
                                         <span class="input-group-btn add-on">
-                                            <button class="btn btn-theme04 add" type="button"><i class="fa fa-clock-o"></i></button>
+                                            <button class="btn btn-theme04" type="button"><i class="fa fa-clock-o"></i></button>
                                         </span>
                                     </div>
                                 </div>
@@ -191,24 +179,7 @@
                                     <input name="totalHour" id="totalHour" class="form-control" readonly>
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="overtimeType" class="col-sm-2 control-label">Type</label>
-                                <div class="col-sm-10">
-                                    <select name="overtimeType" id="overtimeType" class="form-control myselect" onchange="resultSalary()">
-                                        <option value="">-- Select Overtime Type --</option>
-                                        <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.name}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="oSalary" class="col-sm-2 control-label">Overtime Salary</label>
-                                <div class="col-sm-10" >
-                                    <input name="oSalary" id="oSalary" class="form-control" readonly>
-                                </div>
-                            </div>
-                            
+
 
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Document</label>
@@ -226,6 +197,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="overtimeType" class="col-sm-2 control-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select name="overtimeType" id="overtimeType" class="form-control myselect">
+                                        <option value="">-- Select Overtime Type --</option>
+                                        <option th:each="data:${dataOvertimeType}" th:value="${data.id}" th:text="${data.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Activity</label>
                                 <div class="col-sm-10">
                                     <textarea name="activity" id="activity"  class="form-control"></textarea>
@@ -233,7 +213,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" onclick="swAlert">Save</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </form>
@@ -252,7 +232,7 @@
                         <h4 class="modal-title" id="myModalLabel">Reject Overtime Request</h4>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/cancel/id}" class="form-horizontal style-form" method="post">
+                        <form th:action="@{/mgr_cancel/id}" class="form-horizontal style-form" method="post">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">ID</label>
                                 <div class="col-sm-3">
@@ -412,7 +392,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Delete Employee </h4>
+                        <h4 class="modal-title" id="myModalLabel">Edit Profile </h4>
                     </div>
                     <div class="modal-body">
                         <form th:action="@{/employee_save}" class="form-horizontal style-form" method="post">

@@ -155,7 +155,7 @@ public class MainController {
     @PostMapping("/addDataAcc")
     public String addAcc(String password, Account account) {
         //account.setId("0");
-        account.setIsDelete("true");
+        account.setIsDelete("false");
         account.setPassword(new BCryptPasswordEncoder().encode(password));
         account.setIsActive("true");
         accountRepository.save(account);
@@ -284,7 +284,7 @@ public class MainController {
 //    EMPLOYEE PART START
     @GetMapping("/emp_overtime_request")
     public String getAllOvertimeRequest(Model model) {
-        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.getAll());
         model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
         model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
         model.addAttribute("overtimeRequestSave", new OvertimeRequest());
@@ -324,7 +324,7 @@ public class MainController {
 
     @GetMapping("/mgr_approval")
     public String getAllApproval(Model model) {
-        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.getAll());
         model.addAttribute("dataOvertimeType", overtimeTypeRepository.findAll());
         model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
         return "mgr_approval";
@@ -347,6 +347,41 @@ public class MainController {
         overtimeRequestRepository.save(overtimeRequest);
         return "redirect:/mgr_approval";
     }
+    
+    @GetMapping("/mgr_overtime_request")
+    public String getAllMgrOvertimeRequest(Model model) {
+        model.addAttribute("dataOvertimeRequest", overtimeRequestRepository.getAll());
+        model.addAttribute("dataOvertimeType", overtimeTypeService.findAllOvertimeType());
+        model.addAttribute("dataTimeSheet", timeSheetRepository.findAll());
+        model.addAttribute("overtimeRequestSave", new OvertimeRequest());
+        return "mgr_overtime_request";
+    }
+
+    @PostMapping("/mgr_overtime_request_save")
+    public String addDataMgrOvertimeRequest(OvertimeRequest overtimeRequest) {
+        overtimeRequest.setId("0");
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/mgr_overtime_request";
+    }
+    
+     @PostMapping("mgr_cancel/{id}")
+    public String updateMgrCancel(@PathVariable("id") String id, @Valid OvertimeRequest overtimeRequest) {
+        Status status = new Status();
+        status.setId("S-0004");
+        overtimeRequest.setStatus(status);
+        overtimeRequestRepository.save(overtimeRequest);
+        return "redirect:/emp_overtime_request";
+    }
+
+    
+    @GetMapping("/mgr_request_history")
+    public String getAllMgrOvertimeRequestStatus(Model model) {
+        model.addAttribute("dataHistoryRequest", overtimeRequestRepository.findAll());
+        model.addAttribute("dataEmployee", employeeRepository.getAll());
+        return "mgr_request_history";
+    }
+    
+    
 //    HRD PART END
 
 //    @RequestMapping(value = "/employee_save", method = RequestMethod.POST)

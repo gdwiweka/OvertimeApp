@@ -12,6 +12,18 @@
         <!--common script for all pages-->
         <script src="dist/lib/common-scripts.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.js"></script>
+
+        <!--<script src="dist/lib/select2/select2.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>-->
+        <script>
+            // In your Javascript (external .js resource or <script> tag)
+            $(document).ready(function () {
+                $('.select2').select2();
+            });
+        </script>
+
+
         <!--Khusus Page Ini-->
         <script src="dist/lib/jquery-ui-1.9.2.custom.min.js"></script>
         <script type="text/javascript" src="dist/lib/bootstrap-fileupload/bootstrap-fileupload.js"></script>
@@ -22,6 +34,10 @@
         <script type="text/javascript" src="dist/lib/bootstrap-daterangepicker/moment.min.js"></script>
         <script type="text/javascript" src="dist/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
         <script src="dist/lib/advanced-form-components.js"></script>
+
+
+
+
 
         <!--        <script>
                     $(function () {
@@ -163,7 +179,7 @@
                 })
             })
         </script>
-        
+
         <script>
             $(document).ready(function () {
                 $("#rejectModal").on('show.bs.modal', function (e) {
@@ -194,7 +210,7 @@
                 })
             })
         </script>
-        
+
         <script>
             $(document).ready(function () {
                 $("#cancelModal").on('show.bs.modal', function (e) {
@@ -225,7 +241,7 @@
                 })
             })
         </script>
-        
+
         <script>
             $(document).ready(function () {
                 $("#detailApprovalModal").on('show.bs.modal', function (e) {
@@ -259,7 +275,7 @@
                 })
             })
         </script>
-        
+
         <script>
             $(document).ready(function () {
                 $("#detailReqModal").on('show.bs.modal', function (e) {
@@ -499,17 +515,7 @@
                 });
             });
         </script>
-        <script>
-            $(function () {
-                $(".datepicker").datepicker({
-                    //beforeShowDay: $.datepicker.noWeekends,
-                    format: 'yyyy-dd-mm',
-                    autoclose: true,
-                    todayHighlight: true
 
-                });
-            });
-        </script>
         <script>
             $('.datepicker').datepicker({
                 beforeShowDay: function (date) {
@@ -521,11 +527,12 @@
 
         <script>
             jQuery('.default-date-picker').datepicker({
-                format: 'yyyy-dd-mm',
+                format: 'yyyy-mm-dd',
                 autoclose: true,
                 todayHighlight: true
             });
         </script>
+
         <script>
             jQuery('.timepicker-24').datepicker({
                 format: 'hh:mm:ss',
@@ -550,11 +557,55 @@
             moment().format("hh:mm:ss");
         </script>
 
-        <script type="text/javascript">
-            $("#selectMgr").change(function () {
-                console.log($("option:selected", this).text()); //text
-                console.log($(this).val()); //value
-            })
+        <!--        <script type="text/javascript">
+                    $("#selectMgr").change(function () {
+                        console.log($("option:selected", this).text()); //text
+                        console.log($(this).val()); //value
+                    })
+                </script>-->
+
+        <script>
+            function resultTime() {
+                var dummyDate = "1/1/2019";
+                var start_date = document.forms.formID.startTime.value;
+                var end_date = document.forms.formID.endTime.value;
+
+                var timeDiff = (new Date(dummyDate + " " + end_date)).getTime() - (new Date(dummyDate + " " + start_date)).getTime();
+
+                var seconds = (timeDiff / 1000);
+                var hour = Math.trunc((seconds / 60 / 60));
+                document.forms.formID.totalHour.value = hour;
+
+            }
+        </script>
+        <script>
+            function resultSalary() {
+                var hour = document.forms.formID.totalHour.value;
+                var type = document.forms.formID.overtimeType.value;
+                var total;
+
+                switch (type) {
+                    case "T-0002":
+                        total = Math.trunc(3 * (5000000 / 173) * hour);
+                        break;
+                    case "T-0001":
+                        total = Math.trunc(2 * (5000000 / 173) * hour);
+                        break;
+                }
+
+                document.forms.formID.oSalary.value = total;
+
+            }
+        </script>
+
+        <script>
+            function swAlert() {
+                Swal.fire(
+                        'Good job!',
+                        'You clicked the button!',
+                        'success'
+                        )
+            }
         </script>
 
     </div>
